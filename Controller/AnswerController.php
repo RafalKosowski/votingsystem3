@@ -8,11 +8,12 @@ use PDO;
 
 class AnswerController
 {
-    private $model;
+//    private $model;
+//
+//    public function __construct(Answer $model) {
+//        $this->model = $model;
+//    }
 
-    public function __construct(Answer $model) {
-        $this->model = $model;
-    }
 
     public function create($data) {
         $pdo = Database::getInstance()->getConnection();

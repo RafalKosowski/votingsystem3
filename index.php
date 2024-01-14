@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 use Controller\UserController;
 use Model\User;
@@ -22,7 +23,7 @@ function test()
     $userController->create($a);
 }
 
-test();
+//test();
 
 if(!isset($_SESSION['current_user'])){
     header('location: View/loginForm.php');

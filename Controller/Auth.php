@@ -3,6 +3,8 @@
 use Database\Database;
 use Model\User;
 
+session_start();
+
 require_once ("../Database/Database.php");
 require_once "../Model/User.php";
 
