@@ -109,6 +109,22 @@ class VoteController
             return []; // Return an empty array or false, depending on your error handling strategy.
         }
     }
+    public function getAllVotes() {
+        try {
+            $pdo = Database::getInstance()->getConnection();
+
+            $stmt = $pdo->prepare("SELECT * FROM vote WHERE startdate <= CONVERT_TZ(NOW(), 'SYSTEM', 'Europe/Warsaw') AND enddate > NOW()");
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            // Handle the exception (log, display error, etc.)
+            // For example:
+            // logError($e->getMessage());
+            // displayErrorMessage("An error occurred while retrieving active votes. Please try again later.");
+            return []; // Return an empty array or false, depending on your error handling strategy.
+        }
+    }
 
     public function getCompletedVotes() {
         try {
@@ -235,6 +251,20 @@ class VoteController
         }
     }
 
+    public function showVotes($votes)
+    {
+        if (empty($votes)) {
+            echo '<p>No votes available.</p>';
+        } else {
+            echo '<ul>';
+            foreach ($votes as $vote) {
+                echo '<li>';
+                echo '<a href="/votingsystem3/View/user/vote_details.php?id=' . $vote['id'] . '">' . $vote['name'] . '</a>';
 
+                echo '</li>';
+            }
+            echo '</ul>';
+        }
+    }
 
 }

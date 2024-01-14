@@ -125,4 +125,17 @@ class UserController
             throw new \Exception("Error during SQL query execution: " . $errorInfo[2]);
         }
     }
+
+    public function getLoggedUser()
+    {
+        session_start();
+        if (isset($_SESSION['current_user'])) {
+            return $_SESSION['current_user'];
+        } else{
+            header('Location /votingsystem3/View/loginForm.php');
+        }
+        return null;
+
+
+    }
 }
