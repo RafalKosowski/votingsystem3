@@ -7,11 +7,11 @@ use PDO;
 
 class MajorityController
 {
-    private $model;
-
-    public function __construct(Majority $model) {
-        $this->model = $model;
-    }
+//    private $model;
+//
+//    public function __construct(Majority $model) {
+//        $this->model = $model;
+//    }
 
     public function create($data) {
         $pdo = Database::getInstance()->getConnection();
@@ -26,6 +26,12 @@ class MajorityController
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    public function getAll() {
+        $pdo = Database::getInstance()->getConnection();
+        $stmt = $pdo->prepare("SELECT * FROM majority");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function update($id, $data) {

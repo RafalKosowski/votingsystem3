@@ -9,21 +9,24 @@ require ("Model/User.php");
 require_once('Database/Database.php');
 function test()
 {
-    $user= new User();
-    $user->newUser(
-        1, "admin", "zaq1@WSX",
-        "admin@admin.pl",
-        "Admin",
-        "Admin",
-        "1"
-    );
-    $userController = new UserController( $user );
+    for ($i = 2; $i < 4; $i++) {
+        $user= new User();
+        $user->newUser(
+            1, "user$i", "zaq1@WSX",
+            "user$i@user.pl",
+            "User$i",
+            "User",
+            "$i"
+        );
+        $userController = new UserController( $user );
 
-    $a = (array) $user;
-    $userController->create($a);
+        $a = (array) $user;
+        $userController->create($a);
+    }
+
 }
 
-//test();
+test();
 
 if(!isset($_SESSION['current_user'])){
     header('location: View/loginForm.php');

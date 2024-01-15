@@ -250,6 +250,45 @@ class VoteController
             return 'Error'; // Return an error status, depending on your error handling strategy.
         }
     }
+    public function getVotingReport($startDate, $endDate) {
+        try {
+            $pdo = Database::getInstance()->getConnection();
+            $sql = "SELECT 
+                    vote.id AS 'ID Głosowania',
+                    vote.name AS 'Nazwa Głosowania',
+                    vote.startdate AS 'Data Rozpoczęcia',
+                    vote.enddate AS 'Data Zakończenia',
+                    COUNT(user_vote.id) AS 'Liczba Głosujących',
+                    (SELECT COUNT(*) FROM user) AS 'Liczba Uprawnionych',
+                    (CASE 
+                        WHEN quorum.name = '50 procent' AND COUNT(user_vote.id) >= (SELECT COUNT(*) FROM user) / 2 THEN 'ważne'
+                        WHEN quorum.name = 'większość 2/3' AND COUNT(user_vote.id) >= (SELECT COUNT(*) FROM user) * 2 / 3 THEN 'ważne'
+                        WHEN quorum.name = 'brak' THEN 'ważne'
+                        ELSE 'nieważne'
+                    END) AS 'Status Głosowania'
+                FROM 
+                    vote
+                LEFT JOIN 
+                    user_vote ON vote.id = user_vote.vote_id
+                LEFT JOIN 
+                    quorum ON vote.quorum_id = quorum.id
+                WHERE 
+                    vote.enddate BETWEEN :startDate AND :endDate
+                GROUP BY 
+                    vote.id";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':startDate', $startDate);
+            $stmt->bindParam(':endDate', $endDate);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            // Handle the exception (log, display error, etc.)
+            // For example:
+            // logError($e->getMessage());
+            // displayErrorMessage("An error occurred while retrieving the voting report. Please try again later.");
+        }
+    }
+
 
     public function showVotes($votes)
     {
