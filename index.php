@@ -26,7 +26,7 @@ function test()
 
 }
 
-test();
+//test();
 
 if(!isset($_SESSION['current_user'])){
     header('location: View/loginForm.php');

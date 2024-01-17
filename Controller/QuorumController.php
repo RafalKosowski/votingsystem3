@@ -50,4 +50,16 @@ class QuorumController
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function hasQuorum($id,$amount,$all)
+    {
+        $quorum = $this->read($id);
+        $percent = $quorum['min_percent'];
+        $val =$amount*100 / $all;
+        if($val >=$percent)
+            return true;
+
+        return false;
+
+    }
 }

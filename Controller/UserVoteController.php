@@ -62,6 +62,13 @@ class UserVoteController
         $stmt->bindParam(':id', $id);
         $stmt->execute();
     }
+    public function countVotesByVoteId($id) {
+        $pdo = Database::getInstance()->getConnection();
+        $stmt = $pdo->prepare("SELECT * FROM user_vote WHERE user_vote.vote_id = :vote_id");
+        $stmt->bindParam(':vote_id', $id);
+        $stmt->execute();
+        return $stmt->rowCount();
+    }
 
     public function readByUserAndVote($userId, $voteId) {
         $pdo = Database::getInstance()->getConnection();
@@ -71,5 +78,27 @@ class UserVoteController
         $stmt->execute();
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    public function countAndGroupBySelectedAnswer($vote_id) {
+        $pdo = Database::getInstance()->getConnection();
+        $stmt = $pdo->prepare("SELECT selected_answer,COUNT(id) as 'liczba' FROM user_vote Where vote_id=:vote_id GROUP BY selected_answer;");
+        $stmt->bindParam(':vote_id', $vote_id);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    // TO REPAIR
+    public function countVoteWithVoteId($vote_id)
+    {
+        try {
+            $pdo = Database::getInstance()->getConnection();
+            $stmt = $pdo->prepare("SELECT * FROM user_vote WHERE vote_id = :vote_id");
+            $stmt->bindParam(':vote_id', $vote_id);
+            $stmt->execute();
+            return $stmt->rowCount();
+        } catch (PDOException $e) {
+            echo 'Wystąpił problem przy liczeniu'.$e;
+            return null;
+
+        }
     }
 }

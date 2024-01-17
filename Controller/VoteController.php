@@ -9,13 +9,14 @@ use PDOException;
 
 class VoteController
 {
-   // private $model;
+    // private $model;
 
 //    public function __construct(Vote $model) {
 //        $this->model = $model;
 //    }
 
-    public function create($data) {
+    public function create($data)
+    {
         try {
             $pdo = Database::getInstance()->getConnection();
             $stmt = $pdo->prepare("INSERT INTO vote (name, startdate, enddate, question, answers_id, quorum_id, vote_type_id, majority_id) VALUES (:name, :startdate, :enddate, :question, :answers_id, :quorum_id, :vote_type_id, :majority_id)");
@@ -39,7 +40,8 @@ class VoteController
         }
     }
 
-    public function read($id) {
+    public function read($id)
+    {
         try {
             $pdo = Database::getInstance()->getConnection();
             $stmt = $pdo->prepare("SELECT * FROM vote WHERE id = :id");
@@ -54,7 +56,8 @@ class VoteController
         }
     }
 
-    public function update($id, $data) {
+    public function update($id, $data)
+    {
         try {
             $pdo = Database::getInstance()->getConnection();
             $stmt = $pdo->prepare("UPDATE vote SET name = :name, startdate = :startdate, enddate = :enddate, question = :question, answers_id = :answers_id, quorum_id = :quorum_id, vote_type_id = :vote_type_id, majority_id = :majority_id WHERE id = :id");
@@ -79,7 +82,8 @@ class VoteController
         }
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         try {
             $pdo = Database::getInstance()->getConnection();
             $stmt = $pdo->prepare("DELETE FROM vote WHERE id = :id");
@@ -93,7 +97,8 @@ class VoteController
         }
     }
 
-    public function getActiveVotes() {
+    public function getActiveVotes()
+    {
         try {
             $pdo = Database::getInstance()->getConnection();
 
@@ -109,7 +114,9 @@ class VoteController
             return []; // Return an empty array or false, depending on your error handling strategy.
         }
     }
-    public function getAllVotes() {
+
+    public function getAllVotes()
+    {
         try {
             $pdo = Database::getInstance()->getConnection();
 
@@ -126,7 +133,8 @@ class VoteController
         }
     }
 
-    public function getCompletedVotes() {
+    public function getCompletedVotes()
+    {
         try {
             $pdo = Database::getInstance()->getConnection();
 
@@ -143,7 +151,8 @@ class VoteController
         }
     }
 
-    public function getUpcomingVotes() {
+    public function getUpcomingVotes()
+    {
         try {
             $pdo = Database::getInstance()->getConnection();
 
@@ -159,7 +168,9 @@ class VoteController
             return []; // Return an empty array or false, depending on your error handling strategy.
         }
     }
-    public function getActiveVotesForUser($userId) {
+
+    public function getActiveVotesForUser($userId)
+    {
         try {
             $pdo = Database::getInstance()->getConnection();
 
@@ -179,7 +190,8 @@ class VoteController
         }
     }
 
-    public function getCompletedVotesForUser($userId) {
+    public function getCompletedVotesForUser($userId)
+    {
         try {
             $pdo = Database::getInstance()->getConnection();
 
@@ -198,7 +210,9 @@ class VoteController
             return []; // Return an empty array or false, depending on your error handling strategy.
         }
     }
-    public function getUpcomingVotesForUser($userId) {
+
+    public function getUpcomingVotesForUser($userId)
+    {
         try {
             $pdo = Database::getInstance()->getConnection();
 
@@ -218,7 +232,8 @@ class VoteController
         }
     }
 
-    public function getVoteStatus($voteId) {
+    public function getVoteStatus($voteId)
+    {
         try {
             $pdo = Database::getInstance()->getConnection();
 
@@ -250,7 +265,10 @@ class VoteController
             return 'Error'; // Return an error status, depending on your error handling strategy.
         }
     }
-    public function getVotingReport($startDate, $endDate) {
+
+    //do zmiany
+    public function getVotingReport($startDate, $endDate)
+    {
         try {
             $pdo = Database::getInstance()->getConnection();
             $sql = "SELECT 
@@ -289,6 +307,42 @@ class VoteController
         }
     }
 
+    public function getVoteWithAllDetails($id)
+    {
+        try {
+            $pdo = Database::getInstance()->getConnection();
+            $stmt = $pdo->prepare("SELECT vote.id AS vote_id, vote.name , vote.startdate , vote.enddate , vote.question , answers.option1, answers.option2, answers.option3, answers.option4, answers.option5, answers.option6, quorum.name AS quorum_name, vote_type.name AS vote_type_name, majority.name AS majority_name FROM vote INNER JOIN answers ON vote.answers_id = answers.id INNER JOIN quorum ON vote.quorum_id = quorum.id INNER JOIN vote_type ON vote.vote_type_id = vote_type.id LEFT JOIN majority ON vote.majority_id = majority.id WHERE vote.id = :id;");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            // Handle the exception (log, display error, etc.)
+            // For example:
+            // logError($e->getMessage());
+            // displayErrorMessage("An error occurred while retrieving vote information. Please try again later.");
+        }
+    }
+
+    //To do and repair
+    public function isVoteValid($id)
+    {
+        require_once('QuorumController.php');
+        require_once('UserVoteController.php');
+        require_once('UserController.php');
+        $quorumController = new QuorumController();
+       $userVoteController = new UserVoteController();
+        $userController = new UserController();
+        $countVote = $userVoteController->countVoteWithVoteId($id);
+        $countAll = $userController->countUsers();
+        if ($quorumController->hasQuorum($id, $countVote, $countAll)) {
+            return true;
+        }
+
+
+        return false;
+
+    }
+
 
     public function showVotes($votes)
     {
@@ -298,7 +352,7 @@ class VoteController
             echo '<ul>';
             foreach ($votes as $vote) {
                 echo '<li>';
-                echo '<a href="/votingsystem3/View/user/vote_details.php?id=' . $vote['id'] . '">' . $vote['name'] . '</a>';
+                echo '<a href="/votingsystem3/View/secretary/vote_details.php?id=' . $vote['id'] . '">' . $vote['name'] . '</a>';
 
                 echo '</li>';
             }

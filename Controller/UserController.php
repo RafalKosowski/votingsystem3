@@ -8,12 +8,12 @@ use PDO;
 
 class UserController
 {
-    private $model;
-
-    public function __construct(User $model)
-    {
-        $this->model = $model;
-    }
+//    private $model;
+//
+//    public function __construct(User $model)
+//    {
+//        $this->model = $model;
+//    }
 
     public function create($data)
     {
@@ -63,6 +63,14 @@ class UserController
         $stmt->execute();
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    public function countUsers()
+    {
+        $pdo = Database::getInstance()->getConnection();
+        $stmt = $pdo->prepare("SELECT * FROM user ");
+        $stmt->execute();
+
+        return $stmt->rowCount();
     }
 
     public function update($id, $data)
