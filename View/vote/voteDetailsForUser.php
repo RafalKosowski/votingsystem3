@@ -13,8 +13,7 @@ use Controller\VoteController;
 require_once("../../Controller/VoteController.php");
 require_once("../../Model/User.php");
 require_once("../../Database/Database.php");
-// Assume $voteController is an instance of your VoteController
-// Assume $_GET['id'] contains the vote ID from the URL parameter
+
 $voteController = new VoteController();
 $voteId = isset($_GET['id']) ? $_GET['id'] : null;
 
@@ -25,21 +24,22 @@ if ($voteId === null) {
 
     if ($vote) {
         echo '<h1>' . $vote['name'] . '</h1>';
-        echo '<p>Start Date: ' . $vote['startdate'] . '</p>';
-        echo '<p>End Date: ' . $vote['enddate'] . '</p>';
-        echo '<p>Question: ' . $vote['question'] . '</p>';
+        echo '<p>Data rozpoczęcia: ' . $vote['startdate'] . '</p>';
+        echo '<p>Data zakończenia: ' . $vote['enddate'] . '</p>';
+        echo '<p>Pytanie: ' . $vote['question'] . '</p>';
 
-        // You can add more details based on your database structure
 
-        // Add a link to answer the questions if the vote is active
         $currentDate = date('Y-m-d H:i:s');
         if ($currentDate >= $vote['startdate'] && $currentDate <= $vote['enddate']) {
-            echo '<a href="voteAnswerForm.php?id=' . $voteId . '">Answer Questions</a>';
+            //można zrobić jakiś przycisk
+            echo '<a href="voteAnswerForm.php?id=' . $voteId . '">Zagłosuj teraz!</a>';
         } else {
-            echo '<p>This vote is not currently active.</p>';
+            echo '<p>To głosowanie jest obecnie niedostępne</p>';
+
         }
     } else {
-        echo '<p>Vote not found.</p>';
+        echo '<p>Nie znaleziono głosowania</p>';
+        // mozna zrobić przekierowanie na 404
     }
 }
 ?>

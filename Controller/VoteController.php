@@ -49,10 +49,8 @@ class VoteController
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            // Handle the exception (log, display error, etc.)
-            // For example:
-            // logError($e->getMessage());
-            // displayErrorMessage("An error occurred while retrieving vote information. Please try again later.");
+
+            return null;
         }
     }
 
@@ -344,20 +342,9 @@ class VoteController
     }
 
 
-    public function showVotes($votes)
-    {
-        if (empty($votes)) {
-            echo '<p>No votes available.</p>';
-        } else {
-            echo '<ul>';
-            foreach ($votes as $vote) {
-                echo '<li>';
-                echo '<a href="/votingsystem3/View/secretary/voteDetailsForUser.php?id=' . $vote['id'] . '">' . $vote['name'] . '</a>';
 
-                echo '</li>';
-            }
-            echo '</ul>';
-        }
-    }
+
+
+
 
 }

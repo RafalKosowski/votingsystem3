@@ -1,11 +1,23 @@
 <?php
 
+use Controller\UserController;
+require_once("../../Controller/UserController.php");
+
+$userController = new UserController();
+
+if(!$userController->checkUserAccess(2)){
+    header("Location: ../error/nopermission.php");
+}
+
+
 use Controller\MajorityController;
 use Controller\QuorumController;
+
 use Controller\VoteTypeController;
 use Model\Majority;
 use Model\Quorum;
 use Model\VoteType;
+
 
 require_once("../../Controller/VoteTypeController.php");
 require_once("../../Controller/MajorityController.php");
@@ -15,6 +27,10 @@ require_once("../../Model/User.php");
 require_once("../../Database/Database.php");
 // Assume $voteController is an instance of your VoteController
 // Assume $_GET['id'] contains the vote ID from the URL parameter
+
+
+
+
 $voteTypeController = new VoteTypeController();
 $majorityController = new MajorityController();
 $quorumController = new QuorumController();
@@ -23,9 +39,7 @@ $quorumList = $quorumController->getAll();
 $voteTypeList = $voteTypeController->getAll();
 $majorityList= $majorityController->getAll();
 
-//print_r($quorumList);
-//print_r($voteTypeList);
-//print_r($majorityList);
+
 
 
 ?>

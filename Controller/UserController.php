@@ -8,13 +8,8 @@ use PDO;
 
 class UserController
 {
-//    private $model;
-//
-//    public function __construct(User $model)
-//    {
-//        $this->model = $model;
-//    }
-
+    
+    
     public function create($data)
     {
         // Pobranie instancji połączenia z bazą danych
@@ -139,11 +134,20 @@ class UserController
         session_start();
         if (isset($_SESSION['current_user'])) {
             return $_SESSION['current_user'];
-        } else{
-            header('Location /votingsystem3/View/loginForm.php');
         }
+//        else{
+//            //header('Location /votingsystem3/View/loginForm.php');
+//        }
         return null;
 
 
+    }
+
+    public function checkUserAccess($userLevel)
+    {
+        if($this->getLoggedUser()->permission_id <= $userLevel)
+            return true;
+
+        return  false;
     }
 }

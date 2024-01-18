@@ -1,3 +1,17 @@
+<?php
+//repair Answers percent
+
+
+use Controller\UserController;
+require_once("../../Controller/UserController.php");
+
+$userController = new UserController();
+
+if(!$userController->checkUserAccess(2)){
+    header("Location: ../error/nopermission.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,8 +22,8 @@
 <body>
 <?php
 
+
 use Controller\AnswerController;
-use Controller\UserController;
 use Controller\UserVoteController;
 use Controller\VoteController;
 
