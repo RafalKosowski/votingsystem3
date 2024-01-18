@@ -2,6 +2,3 @@
 
 echo "Admin";
 ?>
-<table>
-    
-</table>

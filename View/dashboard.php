@@ -10,6 +10,11 @@ if (isset($_SESSION['current_user'])){
     echo $user_permission;
 
     switch ($user_permission){
+        
+        case 4:
+            header("Location: roles/admin/admin.php");
+            break;
+
         case 3:
             header("Location: roles/user/user.php");
             break;
