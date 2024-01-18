@@ -2,6 +2,11 @@
 
 namespace Controller;
 use Model\AdminModel;
+
+include "../../Model/AdminModel.php";
+include "../../Database/Database.php";
+
+
 class AdminController
 {
     private $adminModel;
@@ -9,9 +14,11 @@ class AdminController
 
     public function showAllUsers()
     {
-        $this->checkAdminSession();
+//        $this->checkAdminSession();
         $adminModel = new AdminModel();
-        $users = $this->$adminModel->getAllUsers();
+        $users = $adminModel->getAllUsers();
+//        print_r( $users);
+        return $users;
 
 
     }
@@ -49,7 +56,7 @@ class AdminController
     private function checkAdminSession()
     {
         if (!isset($_SESSION['admin'])) {
-            header("Location:/");
+//            header("Location: /");
             exit;
         }
     }
