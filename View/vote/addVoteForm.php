@@ -40,7 +40,7 @@ $majorityList= $majorityController->getAll();
 </head>
 <body>
 
-<form action="submit_vote.php" method="post">
+<form action="../../Controller/submit_vote.php" method="post">
     <label for="name">Name:</label><br>
     <input type="text" id="name" name="name" maxlength="64" required><br>
     <label for="startdate">Start Date:</label><br>

@@ -38,7 +38,7 @@ if (empty($activeVotes)) {
     echo '<ul>';
     foreach ($activeVotes as $vote) {
         echo '<li>';
-        echo '<a href="/votingsystem3/View/user/vote_details.php?id=' . $vote['id'] . '">' . $vote['name'] . '</a>';
+        echo '<a href="/votingsystem3/View/user/voteDetailsForUser.php?id=' . $vote['id'] . '">' . $vote['name'] . '</a>';
         echo '</li>';
     }
     echo '</ul>';

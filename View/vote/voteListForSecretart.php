@@ -27,7 +27,7 @@ $voteController = new VoteController();
 </head>
 <body>
 <button>
-    <a href="addVote.php"> Dodaj Głosowanie </a>
+    <a href="addVoteForm.php"> Dodaj Głosowanie </a>
 </button>
 <div>
     <h1>Aktywne głosowania</h1>

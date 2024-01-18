@@ -38,7 +38,7 @@ if ($voteId === null) {
 
         $answers = $answerController->read($vote['answers_id']);
 
-        echo '<form method="post" action="submit_answers.php">';
+        echo '<form method="post" action="../../Controller/submit_answers.php">';
         echo '<input type="hidden" name="vote_id" value="' . $voteId . '">';
 
         foreach ($answers as $option => $answer) {

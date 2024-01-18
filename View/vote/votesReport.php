@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "</table>";
 }
 ?>
-<form action="generate_pdf.php" method="post">
+<form action="../PDF/generatePDFwithVotes.php" method="post">
     <input type="hidden" name="startDate" value="<?php echo $startDate; ?>">
     <input type="hidden" name="endDate" value="<?php echo $endDate; ?>">
     <input type="submit" value="Generuj PDF">

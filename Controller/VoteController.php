@@ -352,7 +352,7 @@ class VoteController
             echo '<ul>';
             foreach ($votes as $vote) {
                 echo '<li>';
-                echo '<a href="/votingsystem3/View/secretary/vote_details.php?id=' . $vote['id'] . '">' . $vote['name'] . '</a>';
+                echo '<a href="/votingsystem3/View/secretary/voteDetailsForUser.php?id=' . $vote['id'] . '">' . $vote['name'] . '</a>';
 
                 echo '</li>';
             }

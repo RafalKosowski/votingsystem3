@@ -11,13 +11,13 @@ if (isset($_SESSION['current_user'])){
 
     switch ($user_permission){
         case 3:
-            header("Location: user/user.php");
+            header("Location: roles/user/user.php");
             break;
         case 2:
-            header("Location: secretary/secretary.php");
+            header("Location: roles/secretary/secretary.php");
             break;
         case 1:
-            header("Location: admin/admin.php");
+            header("Location: roles/admin/admin.php");
             break;
 
         default:

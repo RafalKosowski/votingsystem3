@@ -34,7 +34,7 @@ if ($voteId === null) {
         // Add a link to answer the questions if the vote is active
         $currentDate = date('Y-m-d H:i:s');
         if ($currentDate >= $vote['startdate'] && $currentDate <= $vote['enddate']) {
-            echo '<a href="answer_vote.php?id=' . $voteId . '">Answer Questions</a>';
+            echo '<a href="voteAnswerForm.php?id=' . $voteId . '">Answer Questions</a>';
         } else {
             echo '<p>This vote is not currently active.</p>';
         }
