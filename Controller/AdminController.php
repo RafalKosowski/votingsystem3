@@ -1,38 +1,56 @@
 <?php
+
 namespace Controller;
-
-use Database\Database;
-use Model\Answer;
-use PDO;
-
+use Model\AdminModel;
 class AdminController
 {
-    private function logoutAdmin()
+    private $adminModel;
+
+
+    public function showAllUsers()
     {
+        $this->checkAdminSession();
+        $adminModel = new AdminModel();
+        $users = $this->$adminModel->getAllUsers();
+
 
     }
-    private function showAllUsers()
-    {
 
-    }
-    private function editUser($id)
+    public function editUser($id)
     {
-
+        $this->checkAdminSession();
     }
-    private function deleteUser($id)
+
+    public function deleteUser($id)
     {
-
+        $this->checkAdminSession();
     }
-    private function addVoteType()
+
+    public function addVoteType()
     {
-
+        $this->checkAdminSession();
     }
-    private function editVoteType($id)
+
+    public function editVoteType($id)
     {
-
+        $this->checkAdminSession();
     }
+
     public function deleteVoteType($id)
     {
+        $this->checkAdminSession();
+    }
 
+    public function logoutAdmin()
+    {
+
+    }
+
+    private function checkAdminSession()
+    {
+        if (!isset($_SESSION['admin'])) {
+            header("Location:/");
+            exit;
+        }
     }
 }
