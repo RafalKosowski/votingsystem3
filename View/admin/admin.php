@@ -8,6 +8,7 @@ require_once("../../Controller/AdminController.php");
 $adminController = new AdminController();
 
 $users = $adminController->showAllUsers();
+
 if (isset($_POST['deleteUser'])) {
     $userIdToDelete = $_POST['deleteUser'];
     $adminController->deleteUser($userIdToDelete);
@@ -26,8 +27,15 @@ if (isset($_POST['editUser'])) {
     echo '<button type="submit" name="saveEditedUser">Save Changes</button>';
     echo '</form>';
 }
+if(isset($_POST['logoutAdmin'])){
+    $adminIdToLogout = $_POST['logoutAdmin'];
+    $adminController->logoutAdmin();
+}
 
 ?>
+<form action="" method="post">
+    <button type="submit" name="logoutAdmin">Logout</button>
+</form>
 
 <table border="1">
     <thead>

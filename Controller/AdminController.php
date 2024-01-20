@@ -58,7 +58,11 @@ class AdminController
 
     public function logoutAdmin()
     {
-
+        $_SESSION=array();
+        session_destroy();
+        header("Location: /");
+        exit;
+        
     }
 
     private function checkAdminSession()
