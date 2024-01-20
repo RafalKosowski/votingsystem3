@@ -1,6 +1,7 @@
 <?php
 
 namespace Controller;
+
 use Model\AdminModel;
 
 include "../../Model/AdminModel.php";
@@ -14,7 +15,7 @@ class AdminController
 
     public function showAllUsers()
     {
-        
+
         $adminModel = new AdminModel();
         $users = $adminModel->getAllUsers();
         return $users;
@@ -22,9 +23,13 @@ class AdminController
 
     }
 
-    public function editUser($id)
+    public function editUser($userId, $editedFirstName, $editedLastName, $editedPermission)
     {
         $this->checkAdminSession();
+        $this->adminModel->editUser($userId, $editedFirstName, $editedLastName, $editedPermission);
+
+        header("Location: View/admin/admin.php");
+        exit;
 
     }
 
@@ -59,7 +64,7 @@ class AdminController
     private function checkAdminSession()
     {
         if (!isset($_SESSION['admin'])) {
-//            header("Location: /");
+            //            header("Location: /");
             exit;
         }
     }
