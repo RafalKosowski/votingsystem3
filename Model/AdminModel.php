@@ -8,19 +8,27 @@ use PDO;
 class AdminModel
 {
     public function getAllUsers()
-{
-    $query = "SELECT user.id, user.login, user.password, user.email, user.firstname, user.lastname, permission.name as permission_name
+    {
+        $query = "SELECT user.id, user.login, user.password, user.email, user.firstname, user.lastname, permission.name as permission_name
               FROM user
               JOIN permission ON user.permission_id = permission.id";
-    // $query="SELECT*FROM user";
-    $pdo = Database::getInstance()->getConnection();
-    $statement = $pdo->prepare($query);
-    $statement->execute();
+        // $query="SELECT*FROM user";
+        $pdo = Database::getInstance()->getConnection();
+        $statement = $pdo->prepare($query);
+        $statement->execute();
 
-    $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $users = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 
-    return $users;
-}
+        return $users;
+    }
+    public function deleteUser($id)
+    {
+        $query = "DELETE FROM user WHERE id = :id";
+        $pdo = Database::getInstance()->getConnection();
+        $statement = $pdo->prepare($query);
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
 
+        $statement->execute();
+    }
 }

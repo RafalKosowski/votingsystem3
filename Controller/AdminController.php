@@ -14,10 +14,9 @@ class AdminController
 
     public function showAllUsers()
     {
-//        $this->checkAdminSession();
+        
         $adminModel = new AdminModel();
         $users = $adminModel->getAllUsers();
-//        print_r( $users);
         return $users;
 
 
@@ -26,11 +25,15 @@ class AdminController
     public function editUser($id)
     {
         $this->checkAdminSession();
+
     }
 
     public function deleteUser($id)
     {
         $this->checkAdminSession();
+        $this->adminModel->deleteUser($id);
+        header("Location: View/admin/admin.php");
+        exit;
     }
 
     public function addVoteType()
