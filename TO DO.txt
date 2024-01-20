@@ -1,2 +1,11 @@
 Do zrobienia:
 
+admin panel
+
+przycisk wyloguj się.
+
+Użytkownik przyciski usuń, edytuj, dodaj.
+
+tabelka z głosowaniem usuń dodaj edytuj,
+
+
