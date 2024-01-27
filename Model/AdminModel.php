@@ -24,11 +24,15 @@ class AdminModel
     }
     public function deleteUser($id)
     {
-        $query = "DELETE FROM user WHERE id = :id";
+        $query = "DELETE FROM user_vote WHERE user_id = :id";
         $pdo = Database::getInstance()->getConnection();
         $statement = $pdo->prepare($query);
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
-
+        $statement->execute();
+    
+        $query = "DELETE FROM user WHERE id = :id";
+        $statement = $pdo->prepare($query);
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
     }
     public function editUser($userId, $editedFirstName, $editedLastName, $editedPermission)
@@ -45,4 +49,20 @@ class AdminModel
         $statement->bindParam(':permission_id', $editedPermission, PDO::PARAM_INT);
         $statement->execute();
     }
+    public function getUserById($id)
+{
+    $query = "SELECT id, login, password, email, firstname, lastname, permission_id
+              FROM user
+              WHERE id = :id";
+
+    $pdo = Database::getInstance()->getConnection();
+    $statement = $pdo->prepare($query);
+    $statement->bindParam(':id', $id, PDO::PARAM_INT);
+    $statement->execute();
+
+    $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+    return $user;
+}
+
 }
