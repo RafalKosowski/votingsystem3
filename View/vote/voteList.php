@@ -15,6 +15,31 @@
     <title>List of Votes</title>
 </head>
 <body>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        a {
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+        }
+
+        a:hover {
+            background-color: #45a049;
+        }
+    </style>
 <button>
     <a href="addVoteForm.php"> Dodaj Głosowanie </a>
 </button>

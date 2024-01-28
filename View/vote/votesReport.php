@@ -6,9 +6,43 @@
     <input type="date" id="endDate" name="endDate"><br>
     <input type="submit" value="Pokaż raport">
 </form>
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
 
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
 
+    th {
+        background-color: #f2f2f2;
+    }
 
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+    form {
+        margin-top: 20px;
+    }
+
+    input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+</style>
 <?php
 
 use Controller\VoteController;

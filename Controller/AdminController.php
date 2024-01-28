@@ -32,6 +32,15 @@ class AdminController
         return $user;
     }
 
+    public function getVoteById($id){
+        $this->checkAdminSession();
+        $voted = $this->adminModel->getVoteById($id);
+        if (!$voted) {
+            echo "User not found!";
+            exit;
+        }
+        return $voted;
+    }
     public function editUser($userId, $editedFirstName, $editedLastName, $editedPermission)
     {
         $this->checkAdminSession();
@@ -49,20 +58,39 @@ class AdminController
         header("Location: /View/admin/admin.php");
         exit;
     }
-
-    public function addVoteType()
+    public function getVotes()
     {
         $this->checkAdminSession();
+        $votes = $this->adminModel->getVotes();
+        return $votes;
     }
 
-    public function editVoteType($id)
+    public function getVotesNames()
     {
         $this->checkAdminSession();
+        $voteTypes = $this->adminModel->getVotesName();
+        return $voteTypes;
     }
 
-    public function deleteVoteType($id)
+
+    public function editVoteType($vote_id,$editedVoteName)
     {
         $this->checkAdminSession();
+        
+        $this->adminModel->editVoteType($vote_id, $editedVoteName);
+
+        header("Location: /View/admin/admin.php");
+        exit;
+
+    }
+
+    public function deleteVoteName($vote_id)
+    {
+        $this->checkAdminSession();
+        $this->adminModel->deleteVoteName($vote_id);
+        header("Location: /View/admin/admin.php");
+        exit;
+
     }
 
     public function logoutAdmin()
@@ -75,10 +103,7 @@ class AdminController
 
     private function checkAdminSession()
     {
-        // if (!isset($_SESSION['current_user'])) {
-        // echo "not admin";
-        // exit;
-        // }
+
     }
 }
 ?>

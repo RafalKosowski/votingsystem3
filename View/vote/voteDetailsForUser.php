@@ -6,6 +6,38 @@
     <title>Vote Details</title>
 </head>
 <body>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    p {
+        text-align: center;
+    }
+
+    a {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        text-decoration: none;
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 4px;
+    }
+
+    a:hover {
+        background-color: #45a049;
+    }
+</style>
+
 <?php
 
 use Controller\VoteController;
