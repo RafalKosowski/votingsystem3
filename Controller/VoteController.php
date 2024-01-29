@@ -314,6 +314,7 @@ class VoteController
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
+            return null;
             // Handle the exception (log, display error, etc.)
             // For example:
             // logError($e->getMessage());
@@ -340,6 +341,7 @@ class VoteController
         return false;
 
     }
+
 
 
 

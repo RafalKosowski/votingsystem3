@@ -1,5 +1,8 @@
 Do zrobienia:
+Zrobić styl dla sttrony
+dopracować HTMLa
 
+Zrobić zarządanie użytkownikami - Maksym
 admin panel
 
 przycisk wyloguj się.

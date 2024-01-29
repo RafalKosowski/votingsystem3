@@ -47,7 +47,7 @@
 if($userController->checkUserAccess(2)){
     $voteView->buildVoteListForSecretary();
 }elseif ($userController->checkUserAccess(3)){
-    $voteView->buildVoteListforUser();
+    $voteView->buildVoteListForUser();
 }
 ?>
 

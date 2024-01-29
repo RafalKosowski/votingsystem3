@@ -28,7 +28,7 @@ class VoteView
 
     }
 
-    public function buildVoteListforUser()
+    public function buildVoteListForUser()
     {
         global $userId;
 
@@ -48,7 +48,7 @@ class VoteView
             echo '<ul>';
             foreach ($votes as $vote) {
                 echo '<li>';
-                echo '<a href="/votingsystem3/View/secretary/voteDetailsForUser.php?id=' . $vote['id'] . '">' . $vote['name'] . '</a>';
+                echo '<a href="voteDetailsForSecretary.php?id=' . $vote['id'] . '">' . $vote['name'] . '</a>';
 
                 echo '</li>';
             }

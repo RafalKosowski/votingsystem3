@@ -1,9 +1,10 @@
 <?php
-//repair Answers percent
+
 
 
 use Controller\UserController;
 require_once("../../Controller/UserController.php");
+require_once("../../Model/User.php");
 
 $userController = new UserController();
 
@@ -17,6 +18,7 @@ if(!$userController->checkUserAccess(2)){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Vote Details</title>
 </head>
 <body>
@@ -74,7 +76,6 @@ require_once("../../Controller/VoteController.php");
 require_once("../../Controller/UserVoteController.php");
 require_once("../../Controller/UserController.php");
 require_once("../../Controller/AnswerController.php");
-require_once("../../Model/User.php");
 require_once("../../Database/Database.php");
 // Assume $voteController is an instance of your VoteController
 // Assume $_GET['id'] contains the vote ID from the URL parameter
@@ -101,28 +102,81 @@ if ($voteId === null) {
         echo '<p>Typ głosowania: ' . $vote['vote_type_name'] . '</p>';
         echo '<p>Kworum: ' . $vote['quorum_name'] . '</p>';
         echo '<p>Większość: ' . $vote['majority_name'] . '</p>';
+        // Calculate the total votes
+        $totalUsers = $userVoteController->countVoteWithVoteId($voteId);
+        echo '<p> Głosowało:'.$totalUsers.'</p>';
         echo '<p>Odpowiedzi:</p>';
         // Get the answers and votes
         $answers = $answerController->read($voteId);
         $votes = $userVoteController->countAndGroupBySelectedAnswer($voteId);
 
-        print_r($votes);
-        // Calculate the total votes
-        $totalUsers = $userController->countUsers();
-        echo 'tu:'.$totalUsers;
-// to do and repair
-        // Display the answers and vote percentages
-        foreach ($answers as $index => $answer) {
-            $votesForAnswer = isset($votes[$index]) ? $votes[$index]['liczba'] : 0;
-            echo $votesForAnswer;
-            $percentage = $totalUsers > 0 ? round(($votesForAnswer / $totalUsers) * 100, 2) : 0;
-            echo '<p>Odpowiedź: ' . $answer . ' - Głosy: ' . $votesForAnswer . ' (' . $percentage . '%)</p>';
+
+
+
+
+ $voteResult=[];
+
+        $i = 1;
+        foreach ($votes as $vote) {
+            $voteResult[$answers['option'.$vote['selected_answer']]]=$vote['number'];
         }
+
+        echo '<table class="answersForVote">';
+        echo '<tr><th>Odpowiedź</th><th>Głosy</th><th>Procentowo</th></tr>';
+        foreach ($answers as $index => $answer) {
+            if($index!= 'id' && $answer!=null){
+                $v = isset($voteResult[$answer]) ? $voteResult[$answer] :0;
+                $percentage = $totalUsers > 0 ? round(($v / $totalUsers) * 100, 2) : 0;
+                echo '<tr><td>' . $answer. '</td><td>' . $v . '</td><td>' . $percentage . '%</td></tr>';
+            }
+
+        }
+        echo '</table>';
+        echo '  <!-- Dodaj miejsce na wykres -->';
+        echo '<canvas id="myChart" style="max-width: 200px; max-height: 200px;"></canvas>
+';
     } else {
         echo '<p>Vote not found.</p>';
     }
 
 }
 ?>
+
 </body>
+<!-- Skrypt do generowania wykresu -->
+<script>
+    // Dane do wykresu
+    var labels = <?php echo json_encode(array_map(function($label, $percentage) {
+        return $label . ' (' . $percentage . '%)';
+    }, array_keys($voteResult), array_map(function($value) use ($totalUsers) {
+        return round(($value / $totalUsers) * 100, 2);
+    }, array_values($voteResult)))); ?>;
+
+    var data = <?php echo json_encode(array_values($voteResult)); ?>;
+
+
+
+    // Utwórz kontekst dla wykresu
+    var ctx = document.getElementById('myChart').getContext('2d');
+
+    // Utwórz wykres kołowy
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: data,
+                backgroundColor: [
+                    'rgba(5,245,79,0.7)',
+                    'rgba(239,10,10,0.7)',
+                    'rgba(66,155,232,0.7)',
+                    'rgba(30,77,180,0.7)',
+                    'rgba(107,30,180,0.7)',
+                    'rgba(66,62,62,0.7)',
+                    // Dodaj więcej kolorów według potrzeb
+                ],
+            }]
+        },
+    });
+</script>
 </html>

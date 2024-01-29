@@ -33,6 +33,7 @@ class AdminModel
         $statement = $pdo->prepare($query);
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
+        echo $statement->errorCode();
     }
 
     public function editUser($userId, $editedFirstName, $editedLastName, $editedPermission)
@@ -48,6 +49,8 @@ class AdminModel
         $statement->bindParam(':lastname', $editedLastName, PDO::PARAM_STR);
         $statement->bindParam(':permission_id', $editedPermission, PDO::PARAM_INT);
         $statement->execute();
+
+        echo $statement->errorCode();
     }
 
     public function getUserById($id)

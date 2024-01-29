@@ -81,7 +81,7 @@ class UserVoteController
     }
     public function countAndGroupBySelectedAnswer($vote_id) {
         $pdo = Database::getInstance()->getConnection();
-        $stmt = $pdo->prepare("SELECT selected_answer,COUNT(id) as 'liczba' FROM user_vote Where vote_id=:vote_id GROUP BY selected_answer;");
+        $stmt = $pdo->prepare("SELECT selected_answer,COUNT(id) as 'number' FROM user_vote Where vote_id=:vote_id GROUP BY selected_answer;");
         $stmt->bindParam(':vote_id', $vote_id);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -101,4 +101,6 @@ class UserVoteController
 
         }
     }
+
+
 }

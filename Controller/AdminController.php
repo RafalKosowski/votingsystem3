@@ -76,7 +76,7 @@ class AdminController
     public function editVoteType($vote_id,$editedVoteName)
     {
         $this->checkAdminSession();
-        
+
         $this->adminModel->editVoteType($vote_id, $editedVoteName);
 
         header("Location: /View/admin/admin.php");
