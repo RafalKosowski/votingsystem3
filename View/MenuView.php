@@ -32,7 +32,7 @@ class MenuView
         }
 
         echo $this->buildMenu($data,$ce);
-        echo '<div class="logout">'.$this->buildElementMenu("Wyloguj",'./View/loginForm.php?logout=1', false).'</div>';
+        echo '<div class="logout">'.$this->buildElementMenu("Wyloguj",'/View/loginForm.php?logout=1', false).'</div>';
 
 
     }

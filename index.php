@@ -9,14 +9,14 @@ require ("Model/User.php");
 require_once('Database/Database.php');
 function test()
 {
-    for ($i = 10; $i < 100; $i++) {
+    for ($i = 11; $i < 100; $i++) {
         $user= new User();
         $user->newUser(
             1, "user$i", "zaq1@WSX",
             "user$i@user.pl",
             "User$i",
             "User",
-            "1"
+            "3"
         );
         $userController = new UserController( $user );
 

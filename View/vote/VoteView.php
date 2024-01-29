@@ -33,7 +33,7 @@ class VoteView
         global $userId;
 
         $voteController = new VoteController();
-        $activeVotes = $voteController->getActiveVotesForUser($userId);
+        $activeVotes = $voteController->getActiveVotes($userId);
         $this ->showVoteList($activeVotes, 'Aktywne głosowania');
 
     }
