@@ -1,38 +1,40 @@
-<?php
-require_once("../Model/User.php");
-session_start();
+<!doctype html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+<nav>
+    <?php
+
+    require_once('../Model/User.php');
+    require_once('../Controller/UserController.php');
+
+    require_once('MenuView.php');
+
+    use Controller\UserController;
+
+    $uc = new UserController();
+    $user = $uc->getLoggedUser();
+    $menu = new MenuView();
+    $menu->getMenu($user->permission_id, 10);
 
 
-if (isset($_SESSION['current_user'])){
-    $current_user = $_SESSION['current_user'];
-    $user_permission = $current_user->permission_id;
+    ?>
 
-    echo $user_permission;
+</nav>
 
-    switch ($user_permission){
-        
-        case 4:
-            header("Location: roles/admin/admin.php");
-            break;
-
-        case 3:
-            header("Location: roles/user/user.php");
-            break;
-        case 2:
-            header("Location: roles/secretary/secretary.php");
-            break;
-        case 1:
-            header("Location: roles/admin/admin.php");
-            break;
-
-        default:
-            echo "Ups. We have a problem";
-    }
-
-
-
-
-
-}
-
+<section>
+    <p> Witaj w systemie głosowania</p>
+</section>
+<footer>
+    // tu bedzie stopka
+</footer>
+</body>
+</html>
 
