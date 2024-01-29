@@ -3,9 +3,9 @@
 use Controller\AnswerController;
 use Controller\VoteController;
 
-require_once("../../Controller/VoteController.php");
-require_once("../../Controller/AnswerController.php");
-require_once("../../Database/Database.php");
+require_once("../Controller/VoteController.php");
+require_once("../Controller/AnswerController.php");
+require_once("../Database/Database.php");
 // submit_vote.php
 
 // ... (inne fragmenty kodu) ...

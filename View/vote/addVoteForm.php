@@ -1,6 +1,28 @@
-<?php
 
+<?php
+require_once("../../Controller/VoteController.php");
+require_once("../../Controller/UserController.php");
+require_once("../../Model/User.php");
+require_once("../../Database/Database.php");
+require_once('../MenuView.php');
+require_once("../../Controller/VoteTypeController.php");
+require_once("../../Controller/MajorityController.php");
+require_once("../../Controller/AnswerController.php");
+require_once("../../Controller/QuorumController.php");
+require_once("../../Model/User.php");
+require_once("../../Database/Database.php");
+use Controller\MajorityController;
+use Controller\QuorumController;
+
+use Controller\VoteTypeController;
+use Model\Majority;
+use Model\Quorum;
+use Model\VoteType;
+
+use Controller\VoteController;
 use Controller\UserController;
+
+
 require_once("../../Controller/UserController.php");
 
 $userController = new UserController();
@@ -10,21 +32,10 @@ if(!$userController->checkUserAccess(2)){
 }
 
 
-use Controller\MajorityController;
-use Controller\QuorumController;
-
-use Controller\VoteTypeController;
-use Model\Majority;
-use Model\Quorum;
-use Model\VoteType;
 
 
-require_once("../../Controller/VoteTypeController.php");
-require_once("../../Controller/MajorityController.php");
-require_once("../../Controller/AnswerController.php");
-require_once("../../Controller/QuorumController.php");
-require_once("../../Model/User.php");
-require_once("../../Database/Database.php");
+
+
 // Assume $voteController is an instance of your VoteController
 // Assume $_GET['id'] contains the vote ID from the URL parameter
 
@@ -44,67 +55,28 @@ $majorityList= $majorityController->getAll();
 
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Add Vote</title>
+    <link rel="stylesheet" href="../style.css">
+    <title>Document</title>
 </head>
 <body>
-<style>
-    body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+<nav>
+    <?php
 
-        form {
-            width: 80%;
-            margin: 20px auto;
-        }
+    $uc = new UserController();
+    $user = $uc->getLoggedUser();
+    $menu = new MenuView();
+    $menu->getMenu($user->permission_id, 1);
+    ?>
 
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
+</nav>
 
-        input[type="text"],
-        select,
-        input[type="datetime-local"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            box-sizing: border-box;
-        }
-
-        input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-
-        #answersSection,
-        #majoritySection {
-            display: none;
-        }
-
-        #answersContainer {
-            margin-bottom: 10px;
-        }
-
-        #answersContainer input[type="text"] {
-            margin-right: 5px;
-        }
-</style>   
+<section>
 <form action="../../Controller/submit_vote.php" method="post">
     <label for="name">Name:</label><br>
     <input type="text" id="name" name="name" maxlength="64" required><br>
@@ -173,7 +145,7 @@ $majorityList= $majorityController->getAll();
 
     <input type="submit" value="Submit">
 </form>
-
+</section>
 <script>
     var voteTypeSelect = document.getElementById('vote_type_id');
     var answersSection = document.getElementById('answersSection');
@@ -221,5 +193,8 @@ $majorityList= $majorityController->getAll();
         }
     });
 </script>
+<footer>
+    // tu bedzie stopka
+</footer>
 </body>
 </html>

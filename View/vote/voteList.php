@@ -30,7 +30,7 @@ $voteView = new VoteView();
     $uc = new UserController();
     $user = $uc->getLoggedUser();
     $menu = new MenuView();
-    $menu->getMenu($user->permission_id, 2);
+    $menu->getMenu($user->permission_id, 3);
     ?>
 
 </nav>

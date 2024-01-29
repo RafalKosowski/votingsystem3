@@ -19,6 +19,8 @@
     if (isset($_GET['loginError'])&&$_GET['loginError']==1)
         echo('<p class="loginError">Podano niepoprawne dane logowania</p>');
     if (isset($_GET['logout'])&&$_GET['logout']==1)
+        unset($_SESSION['currentUser']);
+        session_destroy();
             echo('<p class="loginError">Wylogowano pomyślnie</p>');
 
     ?>

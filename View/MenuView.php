@@ -14,12 +14,12 @@ class MenuView
         switch ($userLevel) {
 
             case 1:
-                $data[] = ['name' => 'Użytkownicy', 'link' => '/votingsystem3/View/admin/admin.php'];
+                $data[] = ['name' => 'Użytkownicy', 'link' => '/View/admin/admin.php'];
             case 2:
-                $data[] = ['name' => 'Dodaj głosowanie', 'link' => '/votingsystem3/View/vote/addVoteForm.php'];
-                $data[] = ['name' => 'Raporty', 'link' => '/votingsystem3/View/vote/votesReport.php'];
+                $data[] = ['name' => 'Dodaj głosowanie', 'link' => '/View/vote/addVoteForm.php'];
+                $data[] = ['name' => 'Raporty', 'link' => '/View/vote/votesReport.php'];
             case 3:
-                $data[] = ['name' => 'Lista głosowań', 'link' => '/votingsystem3/View/vote/voteList.php'];
+                $data[] = ['name' => 'Lista głosowań', 'link' => '/View/vote/voteList.php'];
 
 
 
@@ -32,7 +32,7 @@ class MenuView
         }
 
         echo $this->buildMenu($data,$ce);
-        echo '<div class="logout">'.$this->buildElementMenu("Wyloguj",'/votingsystem3/View/loginForm.php?logout=1', false).'</div>';
+        echo '<div class="logout">'.$this->buildElementMenu("Wyloguj",'./View/loginForm.php?logout=1', false).'</div>';
 
 
     }
