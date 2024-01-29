@@ -66,6 +66,7 @@ class UserController
         $stmt->execute();
 
         return $stmt->rowCount();
+
     }
 
     public function update($id, $data)

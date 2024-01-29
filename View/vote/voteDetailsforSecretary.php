@@ -70,9 +70,9 @@ if(!$userController->checkUserAccess(2)){
 
         if ($vote) {
             echo '<h1>' . $vote['name'] . '</h1>';
-            echo '<div class="vote_valid"><p>'.
-            $voteController->isVoteValid($voteId) ? '<li style="color:green">Ważne </li>': '<li style="color:red">Nieważne </li>'
-                .'</p></div>';
+//            echo '<div class="vote_valid"><p>'.
+//            $voteController->isVoteValid($voteId) ? '<li style="color:green">Ważne </li>': '<li style="color:red">Nieważne </li>'
+//                .'</p></div>';
             echo '<p>Data rozpoczęcia: ' . $vote['startdate'] . '</p>';
             echo '<p>Data zakończenia: ' . $vote['enddate'] . '</p>';
             echo '<p>Pytanie: ' . $vote['question'] . '</p>';

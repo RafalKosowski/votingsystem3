@@ -34,25 +34,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $abstain = $_POST['abstain'];
 
 
-      //  try {
-            // Dodaj nowe odpowiedzi do bazy danych
-            $newAnswerId = $answerController->create([
-                'option1' => isset($answers[0]) ? $answers[0] : null,
-                'option2' => isset($answers[1]) ? $answers[1] : null,
-                'option3' => isset($answers[2]) ? $answers[2] : null,
-                'option4' => isset($answers[3]) ? $answers[3] : null,
-                'option5' => isset($answers[4]) ? $answers[4] : null,
-                'option6' => isset($abstain) ? $abstain : 'Wstrzymuję się',
-            ]);
+        //  try {
+        // Dodaj nowe odpowiedzi do bazy danych
+        $newAnswerId = $answerController->create([
+            'option1' => isset($answers[0]) ? $answers[0] : null,
+            'option2' => isset($answers[1]) ? $answers[1] : null,
+            'option3' => isset($answers[2]) ? $answers[2] : null,
+            'option4' => isset($answers[3]) ? $answers[3] : null,
+            'option5' => isset($answers[4]) ? $answers[4] : null,
+            'option6' => isset($abstain) ? $abstain : 'Wstrzymuję się',
+        ]);
 
-            // Ustaw odpowiednie id w $data['answers_id']
-            $data['answers_id'] = $newAnswerId;
-     //   } catch (\PDOException $e) {
-            // Obsługa błędów dodawania odpowiedzi do bazy danych
-            // Logowanie, wyświetlanie komunikatów, itp.
-      //      echo "An error occurred while adding answers to the database. Please try again later.";
+        // Ustaw odpowiednie id w $data['answers_id']
+        $data['answers_id'] = $newAnswerId;
+        //   } catch (\PDOException $e) {
+        // Obsługa błędów dodawania odpowiedzi do bazy danych
+        // Logowanie, wyświetlanie komunikatów, itp.
+        //      echo "An error occurred while adding answers to the database. Please try again later.";
         //    exit; // Zakończ przetwarzanie skryptu w przypadku błędu.
-      //  }
+        //  }
     }
 
     $voteController = new VoteController();
@@ -60,10 +60,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         // Tworzenie głosowania
         $voteController->create($data);
-        echo "Vote created successfully!";
+        echo '<script> alert("Vote created successfully!");</script>';
+        header('Location: /');
+
     } catch (PDOException $e) {
         // Obsługa błędów tworzenia głosowania
-        echo "An error occurred while creating a vote. Please try again later.";
+        echo "An error occurred ";
     }
 }
-
