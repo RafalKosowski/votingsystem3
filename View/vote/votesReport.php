@@ -43,7 +43,8 @@ use Controller\UserController;
     </form>
 
     <?php
-
+error_reporting(0);
+ini_set('display_errors', 0);
     $voteController = new VoteController();
 
     // Sprawdź, czy formularz został wysłany

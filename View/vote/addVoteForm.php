@@ -1,5 +1,7 @@
 
 <?php
+error_reporting(0);
+ini_set('display_errors', 0);
 require_once("../../Controller/VoteController.php");
 require_once("../../Controller/UserController.php");
 require_once("../../Model/User.php");

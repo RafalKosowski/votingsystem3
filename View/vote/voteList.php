@@ -26,7 +26,8 @@ $voteView = new VoteView();
 <body>
 <nav>
     <?php
-
+error_reporting(0);
+ini_set('display_errors', 0);
     $uc = new UserController();
     $user = $uc->getLoggedUser();
     $menu = new MenuView();

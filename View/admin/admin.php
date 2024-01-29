@@ -1,6 +1,7 @@
 <?php
 session_start();
-
+error_reporting(0);
+ini_set('display_errors', 0);
 use Controller\AdminController;
 
 require_once("../../Controller/AdminController.php");
@@ -114,7 +115,8 @@ $voteName = $adminController->getVotesNames();
             margin-top: 20px;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
@@ -152,6 +154,7 @@ $voteName = $adminController->getVotesNames();
             width: 50%;
             padding: 0 15px;
         }
+
         @media screen and (max-width: 600px) {
             .col-6 {
                 width: 100%;
@@ -165,6 +168,13 @@ $voteName = $adminController->getVotesNames();
         <form action="" method="post">
             <button class="btn" type="submit" name="logoutAdmin">Logout</button>
         </form>
+        <button onclick="goBack()">Powrót</button>
+
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
         <div class="row">
             <div class="col-6">
                 <h1>User List</h1>
