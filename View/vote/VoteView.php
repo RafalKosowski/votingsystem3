@@ -21,11 +21,11 @@ class VoteView
     {
         $voteController = new VoteController();
         $activeVotes = $voteController->getActiveVotes();
-        $this ->showVoteList($activeVotes, 'Aktywne głosowania');
+        $this ->showVoteList($activeVotes, 'Aktywne głosowania',2);
         $completedVotes= $voteController->getUpcomingVotes();
-        $this ->showVoteList($completedVotes, 'Zakończone głosowania');
+        $this ->showVoteList($completedVotes, 'Zakończone głosowania',2);
         $upcomingVotes = $voteController->getUpcomingVotes();
-        $this ->showVoteList($upcomingVotes, 'Nadchodzące głosowania');
+        $this ->showVoteList($upcomingVotes, 'Nadchodzące głosowania',2);
 
     }
 
@@ -35,11 +35,11 @@ class VoteView
 
         $voteController = new VoteController();
         $activeVotes = $voteController->getActiveVotes($userId);
-        $this ->showVoteList($activeVotes, 'Aktywne głosowania');
+        $this ->showVoteList($activeVotes, 'Aktywne głosowania',3);
 
     }
 
-    public function showVoteList($votes,$nameList)
+    public function showVoteList($votes,$nameList,$userLevel)
     {
         echo '<div>';
         echo  '<h1>'. $nameList .'</h1>';
@@ -49,7 +49,12 @@ class VoteView
             echo '<ul>';
             foreach ($votes as $vote) {
                 echo '<li>';
-                echo '<a href="voteDetailsForSecretary.php?id=' . $vote['id'] . '">' . $vote['name'] . '</a>';
+                if ($userLevel<3){
+                    echo '<a href="voteDetailsForSecretary.php?id=' . $vote['id'] . '">' . $vote['name'] . '</a>';
+                }elseif ($userLevel>=3){
+                    echo '<a href="voteDetailsForUser.php?id=' . $vote['id'] . '">' . $vote['name'] . '</a>';
+                }
+
 
                 echo '</li>';
             }

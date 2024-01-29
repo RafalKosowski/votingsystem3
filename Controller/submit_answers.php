@@ -3,11 +3,11 @@ use Controller\AnswerController;
 use Controller\VoteController;
 use Controller\UserVoteController;
 
-require_once("../../Controller/VoteController.php");
-require_once("../../Controller/AnswerController.php");
-require_once("../../Controller/UserVoteController.php");
-require_once("../../Model/User.php");
-require_once("../../Database/Database.php");
+require_once("/Controller/VoteController.php");
+require_once("/Controller/AnswerController.php");
+require_once("/Controller/UserVoteController.php");
+require_once("/Model/User.php");
+require_once("/Database/Database.php");
 
 session_start();
 $voteController = new VoteController();

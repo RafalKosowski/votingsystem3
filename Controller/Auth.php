@@ -34,8 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $user['permission_id']
         );
         $_SESSION['current_user'] = $us;
-        header("Location: ../View/dashboard.php");
+        header("Location: /View/dashboard.php");
     } else {
-        header("Location: ../View/loginForm.php?loginError=1");
+        header("Location: /View/loginForm.php?loginError=1");
     }
 }
