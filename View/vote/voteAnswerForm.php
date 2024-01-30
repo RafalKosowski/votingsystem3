@@ -87,9 +87,7 @@ use Controller\UserVoteController;
     }
     ?>
 </section>
-<footer>
-    Stopka
-</footer>
+<?php include_once "../elements/footer.php"; ?>
 </body>
 </html>
 

@@ -19,7 +19,7 @@ use Controller\UserController;
     <title>Document</title>
 </head>
 <body>
-<?php include "../elements/menu.php";?>
+<?php   $x=2; include "../elements/menu.php";?>
 
 <section>
 
@@ -77,9 +77,7 @@ use Controller\UserController;
 
 
 </section>
-<footer>
-    Stopka
-</footer>
+<?php include_once "../elements/footer.php"; ?>
 </body>
 </html>
 

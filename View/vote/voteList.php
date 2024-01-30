@@ -23,7 +23,7 @@ $voteView = new VoteView();
     <title>Document</title>
 </head>
 <body>
-<?php include "../elements/menu.php";?>
+<?php   $x=3; include "../elements/menu.php";?>
 <section>
     <button>
         <a href="addVoteForm.php"> Dodaj Głosowanie </a>
@@ -36,8 +36,6 @@ $voteView = new VoteView();
     }
     ?>
 </section>
-<footer>
-    Stopka
-</footer>
+<?php include_once "../elements/footer.php"; ?>
 </body>
 </html>

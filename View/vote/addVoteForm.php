@@ -67,7 +67,8 @@ $majorityList= $majorityController->getAll();
     <title>Document</title>
 </head>
 <body>
-    <?php include "../elements/menu.php";?>
+
+    <?php   $x=1; include "../elements/menu.php";?>
 
 <section>
 <form action="../../Controller/submit_vote.php" method="post">
@@ -186,8 +187,6 @@ $majorityList= $majorityController->getAll();
         }
     });
 </script>
-<footer>
-    Stopka
-</footer>
+    <?php include_once "../elements/footer.php"; ?>
 </body>
 </html>

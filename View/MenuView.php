@@ -1,19 +1,14 @@
 <?php
-//error_reporting(0);
-//ini_set('display_errors', 0);
+// Kod PHP
 class MenuView
 {
 
 
-    public function getMenu($userLevel,$ce)
+    public function getMenu($userLevel, $ce)
     {
-
         $data = [];
 
-
-
         switch ($userLevel) {
-
             case 1:
                 $data[] = ['name' => 'Użytkownicy', 'link' => '/View/admin/admin.php'];
             case 2:
@@ -21,40 +16,46 @@ class MenuView
                 $data[] = ['name' => 'Raporty', 'link' => '/View/vote/votesReport.php'];
             case 3:
                 $data[] = ['name' => 'Lista głosowań', 'link' => '/View/vote/voteList.php'];
-
-
-
                 break;
-
             default:
                 echo "Ups. We have a problem";
-//                header('Location: /votingsystem3/View/loginForm.php');
-
         }
 
-        echo $this->buildMenu($data,$ce);
-
-
-
+        echo $this->buildMenu($data, $ce);
     }
 
-    private function buildMenu($data,$ceId)
+    private function buildMenu($data, $ceId)
     {
-        $menu = '<ul>';
+        $menu = '<nav class="navbar navbar-expand-lg navbar-light bg-light">';
+        $menu .= '<a class="navbar-brand" href="#">System głosowania 3</a>';
+        $menu .= '<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">';
+        $menu .= '<span class="navbar-toggler-icon"></span>';
+        $menu .= '</button>';
+        $menu .= '<div class="collapse navbar-collapse" id="navbarNav">';
+        $menu .= '<ul class="navbar-nav">';
 
-        foreach ( $data as $index => $d) {
-            $c = $index==$ceId;
-            $menu.=$this->buildElementMenu($d['name'],$d['link'],$c);
+        foreach ($data as $index => $d) {
+            $isCurrent = $index == $ceId;
+            $menu .= $this->buildElementMenu($d['name'], $d['link'], $isCurrent);
         }
-        $menu.= '<li class="logout">'.$this->buildElementMenu("Wyloguj",'/View/loginForm.php?logout=1', false).'</li>';
-        $menu.='</ul>';
 
+
+        $menu .= $this->buildElementMenu("Wyloguj", '/View/loginForm.php?logout=1', false);
+
+
+        $menu .= '</ul>';
+        $menu .= '</div>';
+        $menu .= '</nav>';
 
         return $menu;
     }
 
-    private function buildElementMenu($name, $link, $isCurrent){
-        $cl= $isCurrent ? 'class="current"' :'';
-        return '<li '.$cl.' ><a href="'.$link.'">'.$name.'</a></li>';
+    private function buildElementMenu($name, $link, $isCurrent)
+    {
+        $class = $isCurrent ? 'nav-item active' : 'nav-item';
+        $btnClass = $name == 'Wyloguj' ? 'logout-btn' : '';
+        return '<li class="' . $class . '"><a class="nav-link ' . $btnClass . '" href="' . $link . '">' . $name . '</a></li>';
     }
+
 }
+?>

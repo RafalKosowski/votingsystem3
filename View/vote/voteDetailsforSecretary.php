@@ -112,9 +112,7 @@ if(!$userController->checkUserAccess(2)){
     ?>
 
 </section>
-<footer>
-    Stopka
-</footer>
+<?php include_once "../elements/footer.php"; ?>
 <script>
     // Dane do wykresu
     var labels = <?php echo json_encode(array_map(function($label, $percentage) {

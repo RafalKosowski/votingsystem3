@@ -46,5 +46,6 @@ if ($voteId === null) {
     }
 }
 ?>
+<?php include_once "../elements/footer.php"; ?>
 </body>
 </html>
