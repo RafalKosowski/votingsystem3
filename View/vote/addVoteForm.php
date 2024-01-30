@@ -1,7 +1,7 @@
 
 <?php
-error_reporting(0);
-ini_set('display_errors', 0);
+//error_reporting(0);
+//ini_set('display_errors', 0);
 require_once("../../Controller/VoteController.php");
 require_once("../../Controller/UserController.php");
 require_once("../../Model/User.php");
@@ -67,16 +67,7 @@ $majorityList= $majorityController->getAll();
     <title>Document</title>
 </head>
 <body>
-<nav>
-    <?php
-
-    $uc = new UserController();
-    $user = $uc->getLoggedUser();
-    $menu = new MenuView();
-    $menu->getMenu($user->permission_id, 1);
-    ?>
-
-</nav>
+    <?php include "../elements/menu.php";?>
 
 <section>
 <form action="../../Controller/submit_vote.php" method="post">

@@ -1,8 +1,8 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
 use Controller\VoteController;
-error_reporting(0);
-ini_set('display_errors', 0);
+//error_reporting(0);
+//ini_set('display_errors', 0);
 require_once("../../Controller/VoteController.php");
 require_once("../../Model/User.php");
 require_once("../../Database/Database.php");

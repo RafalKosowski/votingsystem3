@@ -6,41 +6,11 @@
     <title>Vote Details</title>
 </head>
 <body>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-    }
-
-    h1 {
-        text-align: center;
-        margin-top: 20px;
-    }
-
-    p {
-        text-align: center;
-    }
-
-    a {
-        display: block;
-        text-align: center;
-        margin-top: 20px;
-        text-decoration: none;
-        background-color: #4CAF50;
-        color: white;
-        padding: 10px 20px;
-        border-radius: 4px;
-    }
-
-    a:hover {
-        background-color: #45a049;
-    }
-</style>
+<?php include "../elements/menu.php";?>
 
 <?php
-error_reporting(0);
-ini_set('display_errors', 0);
+//error_reporting(0);
+//ini_set('display_errors', 0);
 use Controller\VoteController;
 
 require_once("../../Controller/VoteController.php");

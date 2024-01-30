@@ -1,0 +1,217 @@
+/*body {*/
+/*    font-family: Arial, sans-serif;*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    background-color: #f4f4f4;*/
+/*    color: #333; !* Adjust text color *!*/
+/*}*/
+
+/*nav {*/
+/*    background-color: #333;*/
+/*    padding: 10px;*/
+/*    text-align: center;*/
+/*}*/
+
+/*nav a {*/
+/*    color: white;*/
+/*    text-decoration: none;*/
+/*    padding: 8px 12px;*/
+/*    margin: 0 10px;*/
+/*    border-radius: 4px;*/
+/*    transition: background-color 0.3s ease;*/
+/*}*/
+
+/*nav a:hover {*/
+/*    background-color: #555;*/
+/*}*/
+
+/*section {*/
+/*    padding: 20px;*/
+/*    margin: 20px;*/
+/*}*/
+
+/*button {*/
+/*    background-color: #4CAF50;*/
+/*    color: white;*/
+/*    padding: 10px 20px;*/
+/*    border: none;*/
+/*    border-radius: 4px;*/
+/*    cursor: pointer;*/
+/*    transition: background-color 0.3s ease;*/
+/*    display: block;*/
+/*    margin-bottom: 20px;*/
+/*}*/
+
+/*button a {*/
+/*    color: white;*/
+/*    text-decoration: none;*/
+/*}*/
+
+/*button:hover {*/
+/*    background-color: #45a049;*/
+/*}*/
+
+/*footer {*/
+/*    background-color: #333;*/
+/*    color: white;*/
+/*    padding: 10px;*/
+/*    text-align: center;*/
+/*}*/
+
+/*table {*/
+/*    width: 100%;*/
+/*    border-collapse: collapse;*/
+/*}*/
+
+/*th, td {*/
+/*    border: 1px solid #dddddd;*/
+/*    text-align: left;*/
+/*    padding: 8px;*/
+/*}*/
+
+/*th {*/
+/*    background-color: #f2f2f2;*/
+/*}*/
+
+/*tr:nth-child(even) {*/
+/*    background-color: #dddddd;*/
+/*}*/
+
+/*form {*/
+/*    margin-top: 20px;*/
+/*    max-width: 300px;*/
+/*    margin: 0 auto;*/
+/*    background-color: #fff;*/
+/*    padding: 20px;*/
+/*    border-radius: 8px;*/
+/*    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
+/*}*/
+
+/*input[type="text"],*/
+/*input[type="password"],*/
+/*select,*/
+/*input[type="datetime-local"] {*/
+/*    width: 100%;*/
+/*    padding: 10px;*/
+/*    margin-bottom: 10px;*/
+/*    box-sizing: border-box;*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 4px;*/
+/*}*/
+
+/*input[type="submit"],*/
+/*a,*/
+/*button {*/
+/*    background-color: #4CAF50;*/
+/*    color: white;*/
+/*    padding: 10px 20px;*/
+/*    border-radius: 4px;*/
+/*    cursor: pointer;*/
+/*    width: 100%;*/
+/*    transition: background-color 0.3s ease;*/
+/*    display: block;*/
+/*    margin: 20px auto;*/
+/*    text-align: center;*/
+/*    text-decoration: none;*/
+/*}*/
+
+/*input[type="submit"]:hover,*/
+/*a:hover {*/
+/*    background-color: #45a049;*/
+/*}*/
+
+/*.loginError {*/
+/*    text-align: center;*/
+/*    color: red;*/
+/*    margin-top: 10px;*/
+/*}*/
+
+/*.current {*/
+/*    color: orange;*/
+/*    background-color: black;*/
+/*}*/
+
+/*#answersSection,*/
+/*#majoritySection {*/
+/*    display: none;*/
+/*}*/
+
+/*#answersContainer {*/
+/*    margin-bottom: 10px;*/
+/*}*/
+
+/*#answersContainer input[type="text"] {*/
+/*    margin-right: 5px;*/
+/*}*/
+
+/*div {*/
+/*    margin-bottom: 20px;*/
+/*}*/
+
+/*ul {*/
+/*    list-style-type: none;*/
+/*    padding: 0;*/
+/*    margin: 0;*/
+/*}*/
+
+/*li {*/
+/*    margin-bottom: 10px;*/
+/*}*/
+
+
+/* Resetowanie domyślnych stylów przeglądarki */
+body, h1, h2, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+}
+
+/* Styl nawigacji */
+nav {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+/* Styl sekcji głównej */
+section {
+    padding: 20px;
+}
+
+/* Responsywność */
+@media only screen and (max-width: 600px) {
+    nav {
+        text-align: center;
+    }
+
+    nav a {
+        display: block;
+        margin: 5px 0;
+    }
+}
+
+/* Styl stopki */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Clearfix hack */
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+

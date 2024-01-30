@@ -39,22 +39,13 @@ if(!$userController->checkUserAccess(2)){
     <title>Document</title>
 </head>
 <body>
-<nav>
-    <?php
-
-    $uc = new UserController();
-    $user = $uc->getLoggedUser();
-    $menu = new MenuView();
-    $menu->getMenu($user->permission_id, 2);
-    ?>
-
-</nav>
+<?php include "../elements/menu.php";?>
 
 <section>
 
     <?php
-error_reporting(0);
-ini_set('display_errors', 0);
+//error_reporting(0);
+//ini_set('display_errors', 0);
     // Assume $voteController is an instance of your VoteController
     // Assume $_GET['id'] contains the vote ID from the URL parameter
     $voteController = new VoteController();

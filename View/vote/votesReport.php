@@ -13,23 +13,13 @@ use Controller\UserController;
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../style.css">
     <title>Document</title>
 </head>
 <body>
-<nav>
-    <?php
-
-    $uc = new UserController();
-    $user = $uc->getLoggedUser();
-    $menu = new MenuView();
-    $menu->getMenu($user->permission_id, 2);
-    ?>
-
-</nav>
+<?php include "../elements/menu.php";?>
 
 <section>
 
@@ -43,8 +33,8 @@ use Controller\UserController;
     </form>
 
     <?php
-error_reporting(0);
-ini_set('display_errors', 0);
+//error_reporting(0);
+//ini_set('display_errors', 0);
     $voteController = new VoteController();
 
     // Sprawdź, czy formularz został wysłany

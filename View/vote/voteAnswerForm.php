@@ -15,8 +15,8 @@ use Controller\VoteController;
 use Controller\UserController;
 use Controller\AnswerController;
 use Controller\UserVoteController;
-error_reporting(0);
-ini_set('display_errors', 0);
+//error_reporting(0);
+//ini_set('display_errors', 0);
 ?>
 
 <!doctype html>
@@ -30,16 +30,7 @@ ini_set('display_errors', 0);
     <title>Odpowiedz na pytania</title>
 </head>
 <body>
-<nav>
-    <?php
-
-    $uc = new UserController();
-    $user = $uc->getLoggedUser();
-    $menu = new MenuView();
-    $menu->getMenu($user->permission_id, 100);
-    ?>
-
-</nav>
+<?php include "../elements/menu.php";?>
 
 <section>
     <?php

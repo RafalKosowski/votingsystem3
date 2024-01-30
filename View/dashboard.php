@@ -9,27 +9,7 @@
     <title>Document</title>
 </head>
 <body>
-<nav>
-    <?php
-    error_reporting(0);
-    ini_set('display_errors', 0);
-    require_once('../Model/User.php');
-    require_once('../Controller/UserController.php');
-
-    require_once('MenuView.php');
-
-    use Controller\UserController;
-
-    $uc = new UserController();
-    $user = $uc->getLoggedUser();
-    $menu = new MenuView();
-    $menu->getMenu($user->permission_id, 10);
-
-
-
-    ?>
-
-</nav>
+<?php include "./elements/menu.php";?>
 
 <section>
     <p> Witaj w systemie głosowania</p>

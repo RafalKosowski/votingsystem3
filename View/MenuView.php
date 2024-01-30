@@ -1,6 +1,6 @@
 <?php
-error_reporting(0);
-ini_set('display_errors', 0);
+//error_reporting(0);
+//ini_set('display_errors', 0);
 class MenuView
 {
 
@@ -33,7 +33,7 @@ class MenuView
         }
 
         echo $this->buildMenu($data,$ce);
-        echo '<div class="logout">'.$this->buildElementMenu("Wyloguj",'/View/loginForm.php?logout=1', false).'</div>';
+
 
 
     }
@@ -46,6 +46,7 @@ class MenuView
             $c = $index==$ceId;
             $menu.=$this->buildElementMenu($d['name'],$d['link'],$c);
         }
+        $menu.= '<li class="logout">'.$this->buildElementMenu("Wyloguj",'/View/loginForm.php?logout=1', false).'</li>';
         $menu.='</ul>';
 
 
