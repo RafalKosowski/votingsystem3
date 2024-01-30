@@ -309,7 +309,7 @@ class VoteController
     {
         try {
             $pdo = Database::getInstance()->getConnection();
-            $stmt = $pdo->prepare("SELECT vote.id AS vote_id, vote.name , vote.startdate , vote.enddate , vote.question , answers.option1, answers.option2, answers.option3, answers.option4, answers.option5, answers.option6, quorum.name AS quorum_name, vote_type.name AS vote_type_name, majority.name AS majority_name FROM vote INNER JOIN answers ON vote.answers_id = answers.id INNER JOIN quorum ON vote.quorum_id = quorum.id INNER JOIN vote_type ON vote.vote_type_id = vote_type.id LEFT JOIN majority ON vote.majority_id = majority.id WHERE vote.id = :id;");
+            $stmt = $pdo->prepare("SELECT vote.id AS vote_id, vote.name , vote.startdate , vote.enddate , vote.question,vote.answers_id , answers.option1, answers.option2, answers.option3, answers.option4, answers.option5, answers.option6, quorum.name AS quorum_name, vote_type.name AS vote_type_name, majority.name AS majority_name FROM vote INNER JOIN answers ON vote.answers_id = answers.id INNER JOIN quorum ON vote.quorum_id = quorum.id INNER JOIN vote_type ON vote.vote_type_id = vote_type.id LEFT JOIN majority ON vote.majority_id = majority.id WHERE vote.id = :id;");
             $stmt->bindParam(':id', $id);
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC);

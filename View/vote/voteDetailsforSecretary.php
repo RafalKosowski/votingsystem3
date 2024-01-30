@@ -1,4 +1,3 @@
-
 <?php
 require_once("../../Controller/VoteController.php");
 require_once("../../Controller/UserController.php");
@@ -21,7 +20,7 @@ use Controller\UserVoteController;
 
 $userController = new UserController();
 
-if(!$userController->checkUserAccess(2)){
+if (!$userController->checkUserAccess(2)) {
     header("Location: ../error/nopermission.php");
 }
 
@@ -36,93 +35,97 @@ if(!$userController->checkUserAccess(2)){
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="../style.css">
-    <title>Document</title>
+
+
+
+    <title> Raport szczegółowy</title>
 </head>
 <body>
-<?php include "../elements/menu.php";?>
+<?php include "../elements/menu.php"; ?>
+<div class="container">
+    <section>
 
-<section>
+        <?php
+        //error_reporting(0);
+        //ini_set('display_errors', 0);
+        // Assume $voteController is an instance of your VoteController
+        // Assume $_GET['id'] contains the vote ID from the URL parameter
+        $voteController = new VoteController();
+        $userVoteController = new UserVoteController();
+        $userController = new UserController();
+        $answerController = new AnswerController();
 
-    <?php
-//error_reporting(0);
-//ini_set('display_errors', 0);
-    // Assume $voteController is an instance of your VoteController
-    // Assume $_GET['id'] contains the vote ID from the URL parameter
-    $voteController = new VoteController();
-    $userVoteController = new UserVoteController();
-    $userController = new UserController();
-    $answerController = new AnswerController();
+        $voteId = isset($_GET['id']) ? $_GET['id'] : null;
 
-    $voteId = isset($_GET['id']) ? $_GET['id'] : null;
-
-    if ($voteId === null) {
-        echo '<p>Invalid vote ID.</p>';
-    } else {
-        $vote = $voteController->getVoteWithAllDetails($voteId);
-
-        if ($vote) {
-            echo '<h1>' . $vote['name'] . '</h1>';
-//            echo '<div class="vote_valid"><p>'.
-//            $voteController->isVoteValid($voteId) ? '<li style="color:green">Ważne </li>': '<li style="color:red">Nieważne </li>'
-//                .'</p></div>';
-            echo '<p>Data rozpoczęcia: ' . $vote['startdate'] . '</p>';
-            echo '<p>Data zakończenia: ' . $vote['enddate'] . '</p>';
-            echo '<p>Pytanie: ' . $vote['question'] . '</p>';
-            echo '<p>Typ głosowania: ' . $vote['vote_type_name'] . '</p>';
-            echo '<p>Kworum: ' . $vote['quorum_name'] . '</p>';
-            echo '<p>Większość: ' . $vote['majority_name'] . '</p>';
-            // Calculate the total votes
-            $totalUsers = $userVoteController->countVoteWithVoteId($voteId);
-            echo '<p> Głosowało:'.$totalUsers.'</p>';
-            echo '<p>Odpowiedzi:</p>';
-            // Get the answers and votes
-            $answers = $answerController->read($voteId);
-            $votes = $userVoteController->countAndGroupBySelectedAnswer($voteId);
-
-
-
-
-
-            $voteResult=[];
-
-            $i = 1;
-            foreach ($votes as $vote) {
-                $voteResult[$answers['option'.$vote['selected_answer']]]=$vote['number'];
-            }
-
-            echo '<table class="answersForVote">';
-            echo '<tr><th>Odpowiedź</th><th>Głosy</th><th>Procentowo</th></tr>';
-            foreach ($answers as $index => $answer) {
-                if($index!= 'id' && $answer!=null){
-                    $v = isset($voteResult[$answer]) ? $voteResult[$answer] :0;
-                    $percentage = $totalUsers > 0 ? round(($v / $totalUsers) * 100, 2) : 0;
-                    echo '<tr><td>' . $answer. '</td><td>' . $v . '</td><td>' . $percentage . '%</td></tr>';
-                }
-
-            }
-            echo '</table>';
-            echo '  <!-- Dodaj miejsce na wykres -->';
-            echo '<canvas id="myChart" style="max-width: 200px; max-height: 200px;"></canvas>
-';
+        if ($voteId === null) {
+            echo '<p>Invalid vote ID.</p>';
         } else {
-            echo '<p>Vote not found.</p>';
+            $vote = $voteController->getVoteWithAllDetails($voteId);
+
+            if ($vote) {
+                echo '<div class="vote-details">';
+                echo '<h1>' . $vote['name'] . '</h1>';
+                echo '<p>Data rozpoczęcia: ' . $vote['startdate'] . '</p>';
+                echo '<p>Data zakończenia: ' . $vote['enddate'] . '</p>';
+                echo '<p>Pytanie: ' . $vote['question'] . '</p>';
+                echo '<p>Typ głosowania: ' . $vote['vote_type_name'] . '</p>';
+                echo '<p>Kworum: ' . $vote['quorum_name'] . '</p>';
+                echo isset($vote['majority_name'] ) ? '<p>Większość: ' . $vote['majority_name'] . '</p>':'';
+// Calculate the total votes
+                $totalUsers = $userVoteController->countVoteWithVoteId($voteId);
+                echo '<p class="total-votes"> Głosowało: ' . $totalUsers . '</p>';
+
+                echo '</div>';
+
+
+                // Get the answers and votes
+                $answers = $answerController->read($vote['answers_id']);
+                $votes = $userVoteController->countAndGroupBySelectedAnswer($voteId);
+
+
+                $voteResult = [];
+
+                $i = 1;
+                foreach ($votes as $vote) {
+                    $voteResult[$answers['option' . $vote['selected_answer']]] = $vote['number'];
+                }
+                echo '<h6> Odpowiedzi </h6>';
+                echo '<table class="answersForVote">';
+                echo '<tr><th>Odpowiedź</th><th>Głosy</th><th>Procentowo</th></tr>';
+                foreach ($answers as $index => $answer) {
+                    if ($index != 'id' && $answer != null) {
+                        $v = isset($voteResult[$answer]) ? $voteResult[$answer] : 0;
+                        $percentage = $totalUsers > 0 ? round(($v / $totalUsers) * 100, 2) : 0;
+                        echo '<tr><td>' . $answer . '</td><td>' . $v . '</td><td>' . $percentage . '%</td></tr>';
+                    }
+
+                }
+                echo '</table>';
+
+
+            } else {
+                echo '<p>Vote not found.</p>';
+            }
+
         }
+        ?>
 
-    }
-    ?>
-
-</section>
+    </section>
+    <div class="chart-container">
+        <h6>  Wykres </h6>
+        <canvas id="myChart" style="max-width: 200px; max-height: 200px;"></canvas>
+    </div>
+</div>
 <?php include_once "../elements/footer.php"; ?>
 <script>
     // Dane do wykresu
-    var labels = <?php echo json_encode(array_map(function($label, $percentage) {
+    var labels = <?php echo json_encode(array_map(function ($label, $percentage) {
         return $label . ' (' . $percentage . '%)';
-    }, array_keys($voteResult), array_map(function($value) use ($totalUsers) {
+    }, array_keys($voteResult), array_map(function ($value) use ($totalUsers) {
         return round(($value / $totalUsers) * 100, 2);
     }, array_values($voteResult)))); ?>;
 
     var data = <?php echo json_encode(array_values($voteResult)); ?>;
-
 
 
     // Utwórz kontekst dla wykresu

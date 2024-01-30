@@ -25,9 +25,9 @@ $voteView = new VoteView();
 <body>
 <?php   $x=3; include "../elements/menu.php";?>
 <section>
-    <button>
-        <a href="addVoteForm.php"> Dodaj Głosowanie </a>
-    </button>
+<!--    <button>-->
+<!--        <a href="addVoteForm.php"> Dodaj Głosowanie </a>-->
+<!--    </button>-->
     <?php
     if ($userController->checkUserAccess(2)) {
         $voteView->buildVoteListForSecretary();

@@ -1,3 +1,6 @@
+
+
+
 <?php
 session_start();
 //error_reporting(0);
@@ -88,82 +91,85 @@ $users = $adminController->showAllUsers();
 $votes = $adminController->getVotes();
 $voteName = $adminController->getVotesNames();
 ?>
-<html lang="en">
+<html lang="pl">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
     <style>
-        * {
-            box-sizing: border-box;
-        }
+        /** {*/
+        /*    box-sizing: border-box;*/
+        /*}*/
 
-        .container {
-            width: 80%;
-            margin: 0 auto;
-            padding: 20px;
-        }
+        /*.container {*/
+        /*    width: 80%;*/
+        /*    margin: 0 auto;*/
+        /*    padding: 20px;*/
+        /*}*/
 
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+        /*h1 {*/
+        /*    text-align: center;*/
+        /*    margin-bottom: 20px;*/
+        /*}*/
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
+        /*table {*/
+        /*    width: 100%;*/
+        /*    border-collapse: collapse;*/
+        /*    margin-top: 20px;*/
+        /*}*/
 
-        th,
-        td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
+        /*th,*/
+        /*td {*/
+        /*    border: 1px solid #ddd;*/
+        /*    padding: 8px;*/
+        /*    text-align: left;*/
+        /*}*/
 
-        th {
-            background-color: #f2f2f2;
-        }
+        /*th {*/
+        /*    background-color: #f2f2f2;*/
+        /*}*/
 
-        form {
-            margin-bottom: 10px;
-        }
+        /*form {*/
+        /*    margin-bottom: 10px;*/
+        /*}*/
 
-        .btn {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
+        /*.btn {*/
+        /*    background-color: #4CAF50;*/
+        /*    color: white;*/
+        /*    border: none;*/
+        /*    border-radius: 4px;*/
+        /*    padding: 10px 20px;*/
+        /*    cursor: pointer;*/
+        /*}*/
 
-        .btn:hover {
-            background-color: #45a049;
-        }
+        /*.btn:hover {*/
+        /*    background-color: #45a049;*/
+        /*}*/
 
-        .row::after {
-            content: "";
-            clear: both;
-            display: table;
-        }
+        /*.row::after {*/
+        /*    content: "";*/
+        /*    clear: both;*/
+        /*    display: table;*/
+        /*}*/
 
-        .col-6 {
-            float: left;
-            width: 50%;
-            padding: 0 15px;
-        }
+        /*.col-6 {*/
+        /*    float: left;*/
+        /*    width: 50%;*/
+        /*    padding: 0 15px;*/
+        /*}*/
 
-        @media screen and (max-width: 600px) {
-            .col-6 {
-                width: 100%;
-            }
-        }
+        /*@media screen and (max-width: 600px) {*/
+        /*    .col-6 {*/
+        /*        width: 100%;*/
+        /*    }*/
+        /*}*/
     </style>
 </head>
 
 <body>
+
+<?php   $x=0; include "../elements/menu.php";?>
     <div class="container">
         <form action="" method="post">
             <button class="btn" type="submit" name="logoutAdmin">Logout</button>
@@ -305,7 +311,7 @@ $voteName = $adminController->getVotesNames();
             </tbody>
         </table>
     </div>
-
+    <?php include_once "../elements/footer.php"; ?>
 </body>
 
 </html>
