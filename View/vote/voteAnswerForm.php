@@ -88,7 +88,7 @@ use Controller\UserVoteController;
     ?>
 </section>
 <footer>
-    // tu bedzie stopka
+    Stopka
 </footer>
 </body>
 </html>

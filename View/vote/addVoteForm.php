@@ -187,7 +187,7 @@ $majorityList= $majorityController->getAll();
     });
 </script>
 <footer>
-    // tu bedzie stopka
+    Stopka
 </footer>
 </body>
 </html>

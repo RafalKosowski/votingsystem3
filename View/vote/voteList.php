@@ -37,7 +37,7 @@ $voteView = new VoteView();
     ?>
 </section>
 <footer>
-    // tu bedzie stopka
+    Stopka
 </footer>
 </body>
 </html>

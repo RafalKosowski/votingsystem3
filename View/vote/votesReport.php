@@ -78,7 +78,7 @@ use Controller\UserController;
 
 </section>
 <footer>
-    // tu bedzie stopka
+    Stopka
 </footer>
 </body>
 </html>

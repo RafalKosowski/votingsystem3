@@ -113,7 +113,7 @@ if(!$userController->checkUserAccess(2)){
 
 </section>
 <footer>
-    // tu bedzie stopka
+    Stopka
 </footer>
 <script>
     // Dane do wykresu
