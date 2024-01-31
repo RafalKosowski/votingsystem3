@@ -164,3 +164,9 @@ canvas {
 .vote-details .total-votes {
     font-weight: bold;
 }
+
+
+.vote-details li{
+   background-color: inherit;
+    padding: initial;
+}
