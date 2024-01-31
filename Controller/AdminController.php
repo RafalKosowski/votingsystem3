@@ -101,6 +101,12 @@ class AdminController
         exit;
     }
 
+    public function addUserToTable($addLogin, $addPass, $addEmail, $addFirstName, $addLastName,$addPermision){
+        $this->adminModel->addUserToTable($addLogin, $addPass, $addEmail, $addFirstName, $addLastName,$addPermision);
+        header("Location: /View/admin/admin.php");
+        exit;
+
+    }
     private function checkAdminSession()
     {
 

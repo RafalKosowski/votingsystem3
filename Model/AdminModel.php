@@ -143,5 +143,26 @@ class AdminModel
         $statement->bindParam(':vote_id', $vote_id, PDO::PARAM_INT);
         $statement->execute();
     }
+    public function addUserToTable($addLogin, $addPass, $addEmail, $addFirstName, $addLastName, $addPermission){
+        try {
+            $query = "INSERT INTO user(login, password, email, firstname, lastname, permission_id) VALUES (:login, :password, :email, :firstname, :lastname, :permission)";
+            $pdo = Database::getInstance()->getConnection();    
+            $statement = $pdo->prepare($query);
+            $statement->bindParam(':login', $addLogin, PDO::PARAM_STR);
+            $statement->bindParam(':password', $addPass, PDO::PARAM_STR);
+            $statement->bindParam(':email', $addEmail, PDO::PARAM_STR);
+            $statement->bindParam(':firstname', $addFirstName, PDO::PARAM_STR);
+            $statement->bindParam(':lastname', $addLastName, PDO::PARAM_STR);
+            $statement->bindParam(':permission', $addPermission, PDO::PARAM_INT);
+            
+            $statement->execute();
+            
+            return $statement->rowCount() > 0;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+    
     
 }

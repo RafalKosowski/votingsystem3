@@ -1,10 +1,7 @@
-
-
-
 <?php
 session_start();
-//error_reporting(0);
-//ini_set('display_errors', 0);
+error_reporting(0);
+ini_set('display_errors', 0);
 use Controller\AdminController;
 
 require_once("../../Controller/AdminController.php");
@@ -49,10 +46,6 @@ if (isset($_POST['saveEditedUser'])) {
     exit;
 }
 
-if (isset($_POST['logoutAdmin'])) {
-    $adminController->logoutAdmin();
-    exit;
-}
 
 if (isset($_POST['deleteVoteName'])) {
     $voteIdToDelete = $_POST['deleteVoteName'];
@@ -87,6 +80,62 @@ if (isset($_POST['saveEditedVote'])) {
     exit;
 }
 
+if (isset($_POST['addUserBtn'])) {
+    // Wyświetl formularz dodawania użytkownika
+    ?>
+    <form action="" method="post">
+        <label for="loginAdd">Login:</label>
+        <input type="text" id="loginAdd" name="loginAdd" required><br>
+
+        <label for="passAdd">Password:</label>
+        <input type="password" id="passAdd" name="passAdd" required><br>
+
+        <label for="emailAdd">Email:</label>
+        <input type="email" id="emailAdd" name="emailAdd" required><br>
+
+        <label for="firstNameAdd">First Name:</label>
+        <input type="text" id="firstNameAdd" name="firstNameAdd" required><br>
+
+        <label for="lastNameAdd">Last Name:</label>
+        <input type="text" id="lastNameAdd" name="lastNameAdd" required><br>
+
+        <label for="permisionAdd">Permission:</label>
+        <select name="permisionAdd" id="permisionAdd" required>
+            <option value="3">User</option>
+            <option value="2">Sekretarz</option>
+            <option value="1">Admin</option>
+        </select>
+        <br>
+
+        <input type="submit" name="addUser" value="Add User">
+    </form>
+    <?php
+}
+
+// Obsługa dodawania użytkownika
+if (isset($_POST['addUser'])) {
+    // Sprawdź, czy wszystkie pola formularza zostały wypełnione
+    if (!empty($_POST['loginAdd']) && !empty($_POST['passAdd']) && !empty($_POST['emailAdd']) && !empty($_POST['firstNameAdd']) && !empty($_POST['lastNameAdd']) && !empty($_POST['permisionAdd'])) {
+        // Pobierz dane z formularza
+        $addLogin = $_POST['loginAdd'];
+        $addPass = password_hash($_POST['passAdd'], PASSWORD_DEFAULT);
+        $addEmail = $_POST['emailAdd'];
+        $addFirstName = $_POST['firstNameAdd'];
+        $addLastName = $_POST['lastNameAdd'];
+        $addPermision = $_POST['permisionAdd'];
+        
+        // Dodaj użytkownika do bazy danych
+        $addedUser = $adminController->addUserToTable($addLogin, $addPass, $addEmail, $addFirstName, $addLastName, $addPermision);
+        
+        // Wyświetl komunikat w zależności od wyniku operacji
+        if ($addedUser) {
+            echo "User added successfully!";
+        } else {
+            echo "User not added!";
+        }
+    }
+}
+
 $users = $adminController->showAllUsers();
 $votes = $adminController->getVotes();
 $voteName = $adminController->getVotesNames();
@@ -97,82 +146,17 @@ $voteName = $adminController->getVotesNames();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style.css">
-    <style>
-        /** {*/
-        /*    box-sizing: border-box;*/
-        /*}*/
 
-        /*.container {*/
-        /*    width: 80%;*/
-        /*    margin: 0 auto;*/
-        /*    padding: 20px;*/
-        /*}*/
-
-        /*h1 {*/
-        /*    text-align: center;*/
-        /*    margin-bottom: 20px;*/
-        /*}*/
-
-        /*table {*/
-        /*    width: 100%;*/
-        /*    border-collapse: collapse;*/
-        /*    margin-top: 20px;*/
-        /*}*/
-
-        /*th,*/
-        /*td {*/
-        /*    border: 1px solid #ddd;*/
-        /*    padding: 8px;*/
-        /*    text-align: left;*/
-        /*}*/
-
-        /*th {*/
-        /*    background-color: #f2f2f2;*/
-        /*}*/
-
-        /*form {*/
-        /*    margin-bottom: 10px;*/
-        /*}*/
-
-        /*.btn {*/
-        /*    background-color: #4CAF50;*/
-        /*    color: white;*/
-        /*    border: none;*/
-        /*    border-radius: 4px;*/
-        /*    padding: 10px 20px;*/
-        /*    cursor: pointer;*/
-        /*}*/
-
-        /*.btn:hover {*/
-        /*    background-color: #45a049;*/
-        /*}*/
-
-        /*.row::after {*/
-        /*    content: "";*/
-        /*    clear: both;*/
-        /*    display: table;*/
-        /*}*/
-
-        /*.col-6 {*/
-        /*    float: left;*/
-        /*    width: 50%;*/
-        /*    padding: 0 15px;*/
-        /*}*/
-
-        /*@media screen and (max-width: 600px) {*/
-        /*    .col-6 {*/
-        /*        width: 100%;*/
-        /*    }*/
-        /*}*/
-    </style>
 </head>
 
 <body>
 
-<?php   $x=0; include "../elements/menu.php";?>
+    <?php $x = 0;
+    include "../elements/menu.php"; ?>
     <div class="container">
+
         <form action="" method="post">
-            <button class="btn" type="submit" name="logoutAdmin">Logout</button>
+            <button class="btn" type="submit" name="addUserBtn">Dodaj użytkownika</button>
         </form>
         <button onclick="goBack()">Powrót</button>
 
