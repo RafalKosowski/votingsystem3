@@ -164,3 +164,45 @@ canvas {
 .vote-details .total-votes {
     font-weight: bold;
 }
+.addUserForm {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.userLabel {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.userInput, .userSelect {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.userBtn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.userBtn:hover {
+    background-color: #454ba0;
+}
+
+/* Opcjonalne style dla opcji w select */
+.userOption {
+    font-size: 14px;
+}

@@ -83,31 +83,31 @@ if (isset($_POST['saveEditedVote'])) {
 if (isset($_POST['addUserBtn'])) {
     // Wyświetl formularz dodawania użytkownika
     ?>
-    <form action="" method="post">
-        <label for="loginAdd">Login:</label>
-        <input type="text" id="loginAdd" name="loginAdd" required><br>
+    <form action="" method="post" class="addUserForm">
+        <label for="loginAdd" class="userLabel">Login:</label>
+        <input type="text" id="loginAdd" name="loginAdd" required class="userInput"><br>
 
-        <label for="passAdd">Password:</label>
-        <input type="password" id="passAdd" name="passAdd" required><br>
+        <label for="passAdd" class="userLabel">Password:</label>
+        <input type="password" id="passAdd" name="passAdd" required class="userInput"><br>
 
-        <label for="emailAdd">Email:</label>
-        <input type="email" id="emailAdd" name="emailAdd" required><br>
+        <label for="emailAdd" class="userLabel">Email:</label>
+        <input type="email" id="emailAdd" name="emailAdd" required class="userInput"><br>
 
-        <label for="firstNameAdd">First Name:</label>
-        <input type="text" id="firstNameAdd" name="firstNameAdd" required><br>
+        <label for="firstNameAdd" class="userLabel">First Name:</label>
+        <input type="text" id="firstNameAdd" name="firstNameAdd" required class="userInput"><br>
 
-        <label for="lastNameAdd">Last Name:</label>
-        <input type="text" id="lastNameAdd" name="lastNameAdd" required><br>
+        <label for="lastNameAdd" class="userLabel">Last Name:</label>
+        <input type="text" id="lastNameAdd" name="lastNameAdd" required class="userInput"><br>
 
-        <label for="permisionAdd">Permission:</label>
-        <select name="permisionAdd" id="permisionAdd" required>
-            <option value="3">User</option>
-            <option value="2">Sekretarz</option>
-            <option value="1">Admin</option>
+        <label for="permisionAdd" class="userLabel">Permission:</label>
+        <select name="permisionAdd" id="permisionAdd" required class="userSelect">
+            <option value="3" class="userOption">User</option>
+            <option value="2" class="userOption">Sekretarz</option>
+            <option value="1" class="userOption">Admin</option>
         </select>
         <br>
 
-        <input type="submit" name="addUser" value="Add User">
+        <input type="submit" name="addUser" value="Add User" class="userBtn">
     </form>
     <?php
 }
