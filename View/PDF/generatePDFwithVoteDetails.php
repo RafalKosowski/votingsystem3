@@ -1,33 +1,24 @@
 
-
-
-
+<head>
+    <meta charset="utf-8">
+    <title> PDF</title>
+</head>
 <?php
 // Include TCPDF library
-require_once('../../TCPDF/tcpdf.php');
-use Controller\VoteController;
-
-require_once ('../../Database/Database.php');
-require_once('../../Controller/VoteController.php'); // Zakładam, że VoteController jest klasą zawierającą logikę związana z głosowaniami
 require_once('../../TCPDF/tcpdf.php');
 
 // Your existing code
 // ...
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $startDate = $_POST["startDate"];
-    $endDate = $_POST["endDate"];
-
-    $voteController = new VoteController();
-    $data = $voteController->getVotingReport($startDate, $endDate);
-
+// Check if the PDF button is clicked
+if (isset($_POST['generate_pdf'])) {
     // Create a new PDF instance
-    $pdf = new TCPDF('L', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+    $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
     // Set document information
     $pdf->SetCreator(PDF_CREATOR);
     $pdf->SetAuthor('Your Name');
-    $pdf->SetTitle('Raport glosowan ');
+    $pdf->SetTitle('Raport szczegółowy');
 //    $pdf->SetFont('arial', '', 10); // Ustawia czcionkę na 'arial'
     $pdf->SetFont('dejavusans', '', 10); // Ustawia czcionkę na 'dejavusans'
 
@@ -37,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Your existing code for generating content
     ob_end_clean();
     ob_start(); // Capture the HTML output
-    require_once("../elements/votesTable.php");
+    require_once("../elements/voteDetailsForReport.php");
     $content = ob_get_contents();
     ob_end_clean();
 
@@ -46,9 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pdf->writeHTML($content, true, false, true, false, '');
     $pdf->SetY(0);
     $pdf->SetFont('helvetica', 'I', 8);
-    $pdf->Cell(0, 10, 'Raport z okresu: ' .$startDate.'  -  '.$endDate, 0, false, 'C');
-    $pdf->SetFont('helvetica', 'I', 8);
-    $pdf->Cell(0, 10, 'Wygenerowano: ' . date('Y-m-d H:i:s'), 0, false, 'R');
+    $pdf->Cell(0, 10, 'Wygenerowano: ' . date('Y-m-d H:i:s'), 0, false, 'C');
 
 //    ob_end_clean();
     // Output the PDF as a download
@@ -57,3 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 // Your existing HTML form
 ?>
+<!--<form method="post" action="">-->
+<!--    <button type="submit" name="generate_pdf">Generate PDF</button>-->
+<!--</form>-->
+

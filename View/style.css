@@ -206,3 +206,9 @@ canvas {
 .userOption {
     font-size: 14px;
 }
+
+
+.vote-details li{
+   background-color: inherit;
+    padding: initial;
+}

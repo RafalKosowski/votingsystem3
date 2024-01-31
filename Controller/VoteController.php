@@ -334,7 +334,7 @@ class VoteController
         $countVote = $userVoteController->countVoteWithVoteId($id);
         $countAll = $userController->countUsers();
         if ($quorumController->hasQuorum($id, $countVote, $countAll)) {
-//            echo $countVote;
+
             return true;
         }
 
