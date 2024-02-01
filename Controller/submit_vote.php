@@ -65,6 +65,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     } catch (PDOException $e) {
         // Obsługa błędów tworzenia głosowania
+        echo '<script> alert("Wystąpił problem przy dodawaniu głosu");</script>';
         echo "An error occurred ";
+
     }
 }

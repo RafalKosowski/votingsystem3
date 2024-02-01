@@ -14,6 +14,22 @@
 <section>
     <p> Witaj w systemie głosowania</p>
 
+
+    <?php
+        if(isset($_GET["submited"]))
+            echo '<p class="info">Oddałeś głos</p>';
+
+        if(isset($_GET["updated"]))
+            echo '<p class="info">Głos został zaktualizowany</p>';
+
+        if(isset($_GET["err"]))
+            echo '<p class="loginError">Nie udało się oddać głosu</p>';
+
+
+
+
+
+    ?>
 </section>
 <?php include_once "../elements/footer.php"; ?>
 </body>
