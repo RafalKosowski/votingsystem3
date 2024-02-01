@@ -30,7 +30,7 @@ nav ul li:hover {
     background-color: inherit;
 }
 
-button {
+button, input[type="submit"] {
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -44,7 +44,7 @@ button a {
     text-decoration: none;
 }
 
-button:hover {
+button:hover, input[type="submit"]:hover{
     background-color: #0056b3;
 }
 
@@ -212,3 +212,54 @@ canvas {
    background-color: inherit;
     padding: initial;
 }
+
+.error{
+    min-height: 82%;
+    color: red;
+    font-weight: bolder;
+    font-size: 100pt;
+}
+
+@media only screen and (max-width: 600px) {
+    .error{
+        min-height: 85%;
+        color: red;
+        font-weight: bolder;
+        font-size: 50pt;
+    }
+}
+form{
+    font-size: 18pt;
+    padding: 10px;
+
+}
+
+form input[type='submit'], button{
+    padding: 5px;
+    margin-top: 10px;
+    font-size: 20pt;
+    border-radius: 5px;
+}
+input, select{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    font-size: 20pt;
+}
+
+
+.loginError{
+    background-color: lightcoral;
+    color: red;
+    border: 2px red solid;
+    border-radius: 5px;
+    padding: 10px;
+}
+.info{
+    background-color: lightblue;
+    color: darkblue;
+    border: 2px darkblue solid;
+    border-radius: 5px;
+    padding: 10px;
+}
+

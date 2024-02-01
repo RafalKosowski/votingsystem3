@@ -22,10 +22,10 @@ class VoteView
         $voteController = new VoteController();
         $activeVotes = $voteController->getActiveVotes();
         $this ->showVoteList($activeVotes, 'Aktywne głosowania',2);
-        $completedVotes= $voteController->getUpcomingVotes();
-        $this ->showVoteList($completedVotes, 'Zakończone głosowania',2);
         $upcomingVotes = $voteController->getUpcomingVotes();
         $this ->showVoteList($upcomingVotes, 'Nadchodzące głosowania',2);
+        $completedVotes= $voteController->getCompletedVotes();
+        $this ->showVoteList($completedVotes, 'Zakończone głosowania',2);
 
     }
 
@@ -44,7 +44,7 @@ class VoteView
         echo '<div>';
         echo  '<h1>'. $nameList .'</h1>';
         if (empty($votes)) {
-            echo '<p>No votes available.</p>';
+            echo '<p>Brak głosowań</p>';
         } else {
             echo '<ul>';
             foreach ($votes as $vote) {

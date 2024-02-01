@@ -10,7 +10,7 @@ class MenuView
 
         switch ($userLevel) {
             case 1:
-                $data[] = ['name' => 'Użytkownicy', 'link' => '/View/admin/admin.php'];
+                $data[] = ['name' => 'Admin Panel', 'link' => '/View/admin/admin.php'];
             case 2:
                 $data[] = ['name' => 'Dodaj głosowanie', 'link' => '/View/vote/addVoteForm.php'];
                 $data[] = ['name' => 'Raporty', 'link' => '/View/vote/votesReport.php'];
@@ -26,7 +26,7 @@ class MenuView
 
     private function buildMenu($data, $ceId)
     {
-        $menu = '<nav class="navbar navbar-expand-lg navbar-light bg-light">';
+        $menu = '<nav class="navbar navbar-expand-lg navbar-light bg-primary">';
         $menu .= '<a class="navbar-brand" href="#">System głosowania 3</a>';
         $menu .= '<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">';
         $menu .= '<span class="navbar-toggler-icon"></span>';
@@ -40,7 +40,7 @@ class MenuView
         }
 
 
-        $menu .= $this->buildElementMenu("Wyloguj", '/View/loginForm.php?logout=1', false);
+        $menu .= $this->buildElementMenu("Wyloguj", '/Controller/logout.php', false);
 
 
         $menu .= '</ul>';

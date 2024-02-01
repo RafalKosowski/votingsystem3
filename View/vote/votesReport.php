@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -19,6 +21,13 @@ require_once('../MenuView.php');
 
 use Controller\VoteController;
 use Controller\UserController;
+require_once("../../Controller/UserController.php");
+
+$userController = new UserController();
+
+if(!$userController->checkUserAccess(2)){
+    header("Location: ../error/nopermission.php");
+}
 
 $x = 2;
 include "../elements/menu.php";

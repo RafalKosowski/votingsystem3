@@ -1,6 +1,7 @@
 {
   "require": {
     "tecnickcom/tcpdf": "^6.4",
-    "ext-pdo": "*"
+    "ext-pdo": "*",
+    "ext-json": "*"
   }
 }

@@ -13,7 +13,7 @@ foreach ($data as $row) {
     echo "<td>" . $row['Liczba Głosujących'] . "</td>";
     echo "<td>" . $row['Liczba Uprawnionych'] . "</td>";
     echo "<td>" . $row['Status Głosowania'] . "</td>";
-    echo "<td><a href='details.php?id=" . $row['ID Głosowania'] . "' class='btn btn-info btn-sm'>Szczegóły</a></td>";
+    echo "<td><a href='../vote/voteDetailsforSecretary.php?id=" . $row['ID Głosowania'] . "' class='btn btn-info btn-sm'>Szczegóły</a></td>";
     echo "</tr>";
 }
 //echo "</tbody>";

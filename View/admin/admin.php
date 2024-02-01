@@ -1,10 +1,22 @@
 <?php
-session_start();
+require_once("../../Controller/UserController.php");
+require_once ("../../Model/User.php");
+use Controller\UserController;
+$userController = new UserController();
+
+if(!$userController->checkUserAccess(2)){
+    header("Location: ../error/nopermission.php");
+}
+//session_start();
 error_reporting(0);
 ini_set('display_errors', 0);
 use Controller\AdminController;
 
+
 require_once("../../Controller/AdminController.php");
+
+$x = 0;
+include "../elements/menu.php";
 
 $adminController = new AdminController();
 
@@ -151,14 +163,15 @@ $voteName = $adminController->getVotesNames();
 
 <body>
 
-    <?php $x = 0;
-    include "../elements/menu.php"; ?>
+
     <div class="container">
 
         <form action="" method="post">
             <button class="btn" type="submit" name="addUserBtn">Dodaj użytkownika</button>
         </form>
         <button onclick="goBack()">Powrót</button>
+        <button>Pobierz zrzut z bazy danych</button>
+        <button>Symulator</button>
 
         <script>
             function goBack() {

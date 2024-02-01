@@ -32,5 +32,5 @@ function test()
 if(!isset($_SESSION['current_user'])){
     header('location: View/loginForm.php');
 }else{
-    header('location: View/dashboard.php');
+    header('location: View/dashboard/dashboard.php');
 }

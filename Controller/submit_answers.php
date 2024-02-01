@@ -3,11 +3,11 @@ use Controller\AnswerController;
 use Controller\VoteController;
 use Controller\UserVoteController;
 
-require_once("/Controller/VoteController.php");
-require_once("/Controller/AnswerController.php");
-require_once("/Controller/UserVoteController.php");
-require_once("/Model/User.php");
-require_once("/Database/Database.php");
+require_once("VoteController.php");
+require_once("AnswerController.php");
+require_once("UserVoteController.php");
+require_once("../Model/User.php");
+require_once("../Database/Database.php");
 
 session_start();
 $voteController = new VoteController();
@@ -28,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo('user: '.$userId. '  vote: '. $voteId .' selected: '. $selectedAnswerId);
         echo('<br>');
         echo ' Invalid form submission.';
+        header('Location: /View/dashboard/dashboard.php?err=true');
         exit;
     }
 
@@ -40,7 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'selected_answer' => $selectedAnswerId,
         ]);
 
-        echo 'Vote updated successfully!';
+        echo 'Vote updated successfullyaaa!';
+        header('Location: /View/dashboard/dashboard.php?updated=true');
     } else {
         // User hasn't voted for this vote, create a new vote
         $userVoteController->create(
@@ -49,9 +51,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $selectedAnswerId
         );
 
-        echo 'Vote submitted successfully!';
+        echo 'Vote submitted successfullyaaa!';
+
+        header('Location: /View/dashboard/dashboard.php?submited=true');
     }
 } else {
     echo 'Invalid request.';
+    header('Location: /View/dashboard/dashboard.php?err=true');
 }
 ?>
